@@ -3,10 +3,6 @@
 // © 2010 by GregFrost
 // http://www.thingiverse.com/thing:3575
 
-$fn=100;
-mm = 1;
-inch = 25.4 * mm;
-
 // Simple Test:
 /*// orig
   gear (circular_pitch=700,
@@ -15,26 +11,6 @@ inch = 25.4 * mm;
 	hub_thickness = 17,
 	circles=8);
 */
-
-ACRYLIC_THICKNESS = 6 * mm;
-ACRYLIC_TOL = .5 * mm;
-PITCH = 400. * 12 / 13.333333;
-difference(){
-  union(){
-    gear (number_of_teeth=6,
-	  circular_pitch = PITCH,
-	  gear_thickness = ACRYLIC_THICKNESS + ACRYLIC_TOL,
-	  rim_thickness = ACRYLIC_THICKNESS + ACRYLIC_TOL,
-	  hub_thickness = ACRYLIC_THICKNESS + ACRYLIC_TOL,
-	  bore_diameter=0. * mm,
-	  circles=4,
-	  pressure_angle=28
-	  );
-    translate([0, 0, -1*mm])cylinder(r=10.5 * mm, h=1*mm);
-    translate([0, 0, 6.5*mm])cylinder(r=8.5 * mm, h=1*mm);
-  }
-  translate([0, 0, -1])cylinder(r=3mm, h=ACRYLIC_THICKNESS + ACRYLIC_TOL + 2);
-}
 
 /*
 translate([225 - 12, 0, 0])
