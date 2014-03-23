@@ -73,4 +73,6 @@ module gear(r, n_tooth=8){
 
 // moon();
 gear(MOON_R, N_MAGNET);
-translate([-MOON_R - 12.5*mm, 0, 0])gear(12.5*mm, 8);
+GEAR_RATIO = 4;
+GEAR_R = MOON_R / GEAR_RATIO;
+translate([-MOON_R - GEAR_R, 0, 0])gear(GEAR_R, N_MAGNET / GEAR_RATIO);

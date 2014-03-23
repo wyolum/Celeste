@@ -66,5 +66,14 @@ module outer_gear(N_TEETH=72){
   }
 }
 
-outer_gear();
+module hand(r=65*mm, w=21.5*mm, h=1*mm){
+//linear_extrude(height = 2, center=true)
+//polygon(points=[[-5*mm/2, 0], [0, 65*mm], [5*mm/2, 0]]);
+  translate([0, 2*mm, -1*mm])
+  linear_extrude(height=h)
+    polygon(points=[[-w/2, 0], [0, r], [w/2, 0]]);
+}
 
+// outer_gear();
+stepper_gear(N_TEETH=6);
+hand();
