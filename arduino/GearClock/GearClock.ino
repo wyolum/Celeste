@@ -29,11 +29,14 @@ void setup() {
 }
 
 void loop(){
-  while(getTime() < next_step_time){
+  /*while(getTime() < next_step_time){
     delay((next_step_time - getTime()) * 1000);
   }
   next_step_time += DT;
   Serial.println(getTime());
-  motor.step(2, FORWARD, INTERLEAVE); 
+  motor.step(2 * 1, FORWARD, INTERLEAVE); 
+  */
+  motor.step(2 * 48, FORWARD, INTERLEAVE); 
+  delay(2000);
   motor.release();
 }
