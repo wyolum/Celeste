@@ -123,6 +123,6 @@ MINUTE = HOUR * 60 + 0;
 // rotate(a=MINUTE/720 * 360, v=[0, 0, 1])color([.1, 1, 0])inner_gear(MINUTE);
 //color([.1, .1, 1])outer_gear(); 
 rotate(a=MINUTE/720 * 360, v=[0, 0, 1])color([1, 0, 0])rotate(a=0, v=[0, 0, 1])hour_hand();
-translate([25, 0, 0])
+translate([25, 0, +RIM_THICKNESS])
 rotate(a=MINUTE/60 * 360, v=[0, 0, 1])minute_hand();
 
