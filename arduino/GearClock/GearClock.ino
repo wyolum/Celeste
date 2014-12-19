@@ -36,7 +36,9 @@ void loop(){
   Serial.println(getTime());
   motor.step(2 * 1, FORWARD, INTERLEAVE); 
   */
-  motor.step(2 * 48, FORWARD, INTERLEAVE); 
-  delay(2000);
+  // motor.step(1, FORWARD, INTERLEAVE); // 48 steps
+  motor.step(1, FORWARD, SINGLE); // 48 steps
+  
+  delay(100);
   motor.release();
 }

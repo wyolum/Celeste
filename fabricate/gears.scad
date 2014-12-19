@@ -4,7 +4,7 @@ $fn=25;
 mm = 1;
 inch = 25.4 * mm;
 
-ACRYLIC_THICKNESS = 6 * mm;
+ACRYLIC_THICKNESS = 5.6 * mm;
 ACRYLIC_TOL = .5 * mm;
 PITCH = 360 * mm;
 PRESSURE_ANGLE = 28;
@@ -53,7 +53,7 @@ module stepper_gear(N_TEETH=6){
   }
 }
 
-module outer_gear(N_TEETH=72){
+module outer_gear(N_TEETH=66){
   PITCH_R = N_TEETH * PITCH / 360.;
   PITCH_D = 2 * PITCH_R;
   PITCH_DIAMETRIAL = N_TEETH / PITCH_D;
@@ -80,7 +80,7 @@ module outer_gear(N_TEETH=72){
   }
 }
 
-module inner_gear(minute, N_TEETH=33){
+module inner_gear(minute, N_TEETH=30){
   PITCH_R = N_TEETH * PITCH / 360.;
   PITCH_D = 2 * PITCH_R;
   PITCH_DIAMETRIAL = N_TEETH / PITCH_D;
@@ -93,8 +93,8 @@ module inner_gear(minute, N_TEETH=33){
   rad = 10 * mm;
   d1 = (rad + .0) * [1,0,0];
   d2 = (rad + .0) * [sin(30), cos(30), 0];
-  translate([0, 39 * mm, .1])
-    rotate(a=360/33/4 - 72./33 * minute/60 * 360 + minute/60.*720, v=[0, 0,1])
+  translate([0, 36  * mm, .1])
+    rotate(a=360/30/4 - 66./30 * minute/60 * 360 + minute/60.*720, v=[0, 0,1])
     difference(){
     gear (number_of_teeth=N_TEETH,
 	  circular_pitch = PITCH,
@@ -105,12 +105,12 @@ module inner_gear(minute, N_TEETH=33){
 	  circles=0,
 	  pressure_angle=28
 	  );
-    translate([0, 0, -1])cylinder(r=5 * mm/2, h=ACRYLIC_THICKNESS + ACRYLIC_TOL + 2 + 100);
+    translate([0, 0, -1])cylinder(r=6 * mm/2, h=ACRYLIC_THICKNESS + ACRYLIC_TOL + 2 + 100);
 
     // lighten the load
     for(i=[0:4]){
-      // rotate(a=360/5 * i, v=[0, 0, 1])translate([0, 18, -1])cylinder(r=9 * mm, h=ACRYLIC_THICKNESS + ACRYLIC_TOL + 2 + 100);
-      scale([1, 1, .3])translate([0, 0, ])rotate(a=360/5 * i, v=[0, 0, 1])translate([0, 18, -1])sphere(r=11 * mm);
+      rotate(a=360/5 * i, v=[0, 0, 1])translate([0, 17, -1])cylinder(r=8 * mm, h=ACRYLIC_THICKNESS + ACRYLIC_TOL + 2 + 100);
+      // scale([1, 1, .3])translate([0, 0, ])rotate(a=360/5 * i, v=[0, 0, 1])translate([0, 18, -1])sphere(r=11 * mm);
     }
   }
 }
@@ -129,21 +129,21 @@ module hour_hand(r=50*mm, w=21.5*mm, h=1.5*mm){
       translate([0, RIM_THICKNESS, -RIM_THICKNESS])
 	linear_extrude(height=h)
 	polygon(points=[[-w/2, 0], [0, r], [w/2, 0]]);
-      translate([0, 39, -RIM_THICKNESS])cylinder(r=4.5 * mm/2, h=ACRYLIC_THICKNESS + RIM_THICKNESS + 1.5*mm);
+      translate([0, 36, -RIM_THICKNESS])cylinder(r=5.5 * mm/2, h=ACRYLIC_THICKNESS + RIM_THICKNESS + .5*mm);
       // translate([0, 39, ACRYLIC_THICKNESS + .25])scale([1, .8, 1])cylinder(r1=3 * mm, r2=2.4*mm, h=1 * mm); // clip
-      translate([0, 39, ACRYLIC_THICKNESS + .75*mm])scale([1, .8, 1])cylinder(r1=3 * mm, r2=2.4*mm, h=1.5*mm); // clip
+      translate([0, 36, ACRYLIC_THICKNESS + .25*mm])scale([1, .8, 1])cylinder(r1=7/2. * mm, r2=3.2*mm, h=1.5*mm); // clip
       translate([0, 0, -RIM_THICKNESS])cylinder(r=11, h=h);
     }
     translate([0, 0, -RIM_THICKNESS - 1])cylinder(r=8.5, h=2*h);
-    translate([-.5 * mm, 39 * mm-5 * mm, 2])cube([1 * mm, 10 * mm, 10 * mm]); // slot
+    translate([-.5 * mm, 36 * mm-5 * mm, 2])cube([1 * mm, 10 * mm, 10 * mm]); // slot
   }
 }
 
 HOUR = 9;
 MINUTE = $t * 60;
 // MINUTE = HOUR * 60 + 15;
-translate([0, -0, -RIM_THICKNESS])rotate(a=MINUTE/720 * 360, v=[0, 0, 1])color([.1, 1, 0])inner_gear(MINUTE);
+// translate([0, -0, -RIM_THICKNESS])rotate(a=MINUTE/720 * 360, v=[0, 0, 1])color([.1, 1, 0])inner_gear(MINUTE);
 //color([.1, .1, 1])outer_gear(); 
-//translate([0, 0, -1.5*mm])rotate(a=MINUTE/720 * 360, v=[0, 0, 1])color([1, 0, 0])rotate(a=0, v=[0, 0, 1])hour_hand();
+translate([0, 0, -1.5*mm])rotate(a=MINUTE/720 * 360, v=[0, 0, 1])color([1, 0, 0])rotate(a=0, v=[0, 0, 1])hour_hand();
 //translate([0, 0, -RIM_THICKNESS])translate([0, 0, 0])rotate(a=MINUTE/60 * 360, v=[0, 0, 1])minute_hand();
 
