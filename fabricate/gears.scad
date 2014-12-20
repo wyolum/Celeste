@@ -1,6 +1,6 @@
 include <Parametric_Involute__Bevel_and_Spur_Gears/parametric_involute_gear_v5.0.scad>
 
-$fn=25;
+$fn=50;
 mm = 1;
 inch = 25.4 * mm;
 
@@ -143,7 +143,8 @@ HOUR = 9;
 MINUTE = $t * 60;
 // MINUTE = HOUR * 60 + 15;
 // translate([0, -0, -RIM_THICKNESS])rotate(a=MINUTE/720 * 360, v=[0, 0, 1])color([.1, 1, 0])inner_gear(MINUTE);
-//color([.1, .1, 1])outer_gear(); 
-translate([0, 0, -1.5*mm])rotate(a=MINUTE/720 * 360, v=[0, 0, 1])color([1, 0, 0])rotate(a=0, v=[0, 0, 1])hour_hand();
+color([.1, .1, 1])outer_gear(); 
+//translate([0, 0, -1.5*mm])rotate(a=MINUTE/720 * 360, v=[0, 0, 1])color([1, 0, 0])rotate(a=0, v=[0, 0, 1])hour_hand();
 //translate([0, 0, -RIM_THICKNESS])translate([0, 0, 0])rotate(a=MINUTE/60 * 360, v=[0, 0, 1])minute_hand();
 
+cylinder(r=50*mm, h=100*mm);
