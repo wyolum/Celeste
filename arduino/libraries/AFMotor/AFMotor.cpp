@@ -501,7 +501,7 @@ void AF_Stepper::step(uint16_t steps, uint8_t dir,  uint8_t style) {
       steppingcounter -= 1000;
     }
   }
-  if (style == MICROSTEP) {
+  if (0 and style == MICROSTEP) {
     while ((ret != 0) && (ret != MICROSTEPS)) {
       ret = onestep(dir, style);
       delay(uspers/1000); // in ms

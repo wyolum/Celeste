@@ -4,7 +4,7 @@ $fn=50;
 mm = 1;
 inch = 25.4 * mm;
 
-ACRYLIC_THICKNESS = 5.6 * mm;
+ACRYLIC_THICKNESS = 5. * mm;
 ACRYLIC_TOL = .5 * mm;
 PITCH = 360 * mm;
 PRESSURE_ANGLE = 28;
@@ -96,20 +96,23 @@ module inner_gear(minute, N_TEETH=30){
   translate([0, 36  * mm, .1])
     rotate(a=360/30/4 - 66./30 * minute/60 * 360 + minute/60.*720, v=[0, 0,1])
     difference(){
-    gear (number_of_teeth=N_TEETH,
-	  circular_pitch = PITCH,
-	  gear_thickness = ACRYLIC_THICKNESS + ACRYLIC_TOL,
-	  rim_thickness = ACRYLIC_THICKNESS + ACRYLIC_TOL,
-	  hub_thickness = ACRYLIC_THICKNESS + ACRYLIC_TOL,
-	  bore_diameter=0. * mm,
-	  circles=0,
-	  pressure_angle=28
-	  );
+    intersection(){
+      cylinder(r1=40, r2=26.5, h=ACRYLIC_THICKNESS); // taper the teeth
+      scale([1, 1, 1])gear (number_of_teeth=N_TEETH,
+	    circular_pitch = PITCH,
+			    gear_thickness = ACRYLIC_THICKNESS/2,
+	    rim_thickness = ACRYLIC_THICKNESS - ACRYLIC_TOL,
+	    hub_thickness = ACRYLIC_THICKNESS - ACRYLIC_TOL,
+	    bore_diameter=0. * mm,
+	    circles=0,
+	    pressure_angle=28
+	    );
+    }
     translate([0, 0, -1])cylinder(r=6 * mm/2, h=ACRYLIC_THICKNESS + ACRYLIC_TOL + 2 + 100);
 
     // lighten the load
     for(i=[0:4]){
-      rotate(a=360/5 * i, v=[0, 0, 1])translate([0, 17, -1])cylinder(r=8 * mm, h=ACRYLIC_THICKNESS + ACRYLIC_TOL + 2 + 100);
+      rotate(a=360/5 * i, v=[0, 0, 1])translate([0, 16, -1])cylinder(r=6 * mm, h=ACRYLIC_THICKNESS + ACRYLIC_TOL + 2 + 100);
       // scale([1, 1, .3])translate([0, 0, ])rotate(a=360/5 * i, v=[0, 0, 1])translate([0, 18, -1])sphere(r=11 * mm);
     }
   }
@@ -142,9 +145,11 @@ module hour_hand(r=50*mm, w=21.5*mm, h=1.5*mm){
 HOUR = 9;
 MINUTE = $t * 60;
 // MINUTE = HOUR * 60 + 15;
-// translate([0, -0, -RIM_THICKNESS])rotate(a=MINUTE/720 * 360, v=[0, 0, 1])color([.1, 1, 0])inner_gear(MINUTE);
-color([.1, .1, 1])outer_gear(); 
+translate([0, -0, -RIM_THICKNESS])rotate(a=MINUTE/720 * 360, v=[0, 0, 1])color([.1, 1, 0])inner_gear(MINUTE);
+//color([.1, .1, 1])outer_gear(); 
 //translate([0, 0, -1.5*mm])rotate(a=MINUTE/720 * 360, v=[0, 0, 1])color([1, 0, 0])rotate(a=0, v=[0, 0, 1])hour_hand();
 //translate([0, 0, -RIM_THICKNESS])translate([0, 0, 0])rotate(a=MINUTE/60 * 360, v=[0, 0, 1])minute_hand();
 
-cylinder(r=50*mm, h=100*mm);
+// cylinder(r=50*mm, h=100*mm); // for scale
+
+
