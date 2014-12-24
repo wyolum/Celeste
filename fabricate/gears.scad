@@ -31,6 +31,7 @@ module stepper_gear(N_TEETH=6){
   // Addendum: Radial distance from pitch circle to outside circle.
   ADDENDUM = 1 / PITCH_DIAMETRIAL;
   
+  thickness = ACRYLIC_THICKNESS + ACRYLIC_TOL;// + RIM_THICKNESS;
   //Outer Circle
   OUTER_RADIUS = PITCH_R + ADDENDUM;
   difference(){
@@ -38,9 +39,9 @@ module stepper_gear(N_TEETH=6){
       rotate(a=360/6/2., v=[0, 0, 1])
       gear (number_of_teeth=6,
 	    circular_pitch = PITCH,
-	    gear_thickness = ACRYLIC_THICKNESS + ACRYLIC_TOL + RIM_THICKNESS,
-	    rim_thickness = ACRYLIC_THICKNESS + ACRYLIC_TOL + RIM_THICKNESS,
-	    hub_thickness = ACRYLIC_THICKNESS + ACRYLIC_TOL + RIM_THICKNESS,
+	    gear_thickness = thickness,
+	    rim_thickness = thickness,
+	    hub_thickness = thickness,
 	    bore_diameter=0. * mm,
 	    circles=4,
 	    pressure_angle=28
@@ -121,10 +122,15 @@ module inner_gear(minute, N_TEETH=30){
 module minute_hand(r=65*mm, w=21.5*mm, h=RIM_THICKNESS - 0.5*mm){
 //linear_extrude(height = 2, center=true)
 //polygon(points=[[-5*mm/2, 0], [0, 65*mm], [5*mm/2, 0]]);
-  stepper_gear(N_TEETH=6);
-  translate([0, 2*mm, -2*RIM_THICKNESS])
-  linear_extrude(height=h)
-    polygon(points=[[-w/2, 0], [0, r], [w/2, 0]]);
+  difference(){
+    union(){
+      stepper_gear(N_TEETH=6);
+      translate([0, 2*mm, -2*RIM_THICKNESS])
+	linear_extrude(height=h)
+	polygon(points=[[-w/2, 0], [0, r], [w/2, 0]]);
+    }
+    translate([0, 0, -50])cylinder(r=3 * mm/2, h=ACRYLIC_THICKNESS + ACRYLIC_TOL + 2 + 100);
+  }
 }
 module hour_hand(r=50*mm, w=21.5*mm, h=1.5*mm){
   difference(){
@@ -145,10 +151,10 @@ module hour_hand(r=50*mm, w=21.5*mm, h=1.5*mm){
 HOUR = 9;
 MINUTE = $t * 60;
 // MINUTE = HOUR * 60 + 15;
-translate([0, -0, -RIM_THICKNESS])rotate(a=MINUTE/720 * 360, v=[0, 0, 1])color([.1, 1, 0])inner_gear(MINUTE);
+// translate([0, -0, -RIM_THICKNESS])rotate(a=MINUTE/720 * 360, v=[0, 0, 1])color([.1, 1, 0])inner_gear(MINUTE);
 //color([.1, .1, 1])outer_gear(); 
 //translate([0, 0, -1.5*mm])rotate(a=MINUTE/720 * 360, v=[0, 0, 1])color([1, 0, 0])rotate(a=0, v=[0, 0, 1])hour_hand();
-//translate([0, 0, -RIM_THICKNESS])translate([0, 0, 0])rotate(a=MINUTE/60 * 360, v=[0, 0, 1])minute_hand();
+translate([0, 0, -RIM_THICKNESS])translate([0, 0, 0])rotate(a=MINUTE/60 * 360, v=[0, 0, 1])minute_hand();
 
 // cylinder(r=50*mm, h=100*mm); // for scale
 

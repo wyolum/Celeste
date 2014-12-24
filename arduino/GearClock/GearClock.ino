@@ -42,7 +42,7 @@ void loop(){
   //motor.step(48, FORWARD, DOUBLE); // 48 steps
   // motor.step(48, FORWARD, INTERLEAVE); // 48 steps
   time_t now = getTime();
-  time_t tick = now + 3600/48;
+  time_t tick = now;// + 3600/48;
   motor.release();
   while(getTime() < tick){
     delay(100);
