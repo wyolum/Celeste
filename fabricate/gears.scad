@@ -130,8 +130,10 @@ module minute_hand(r=65*mm, w=21.5*mm, h=RIM_THICKNESS - 0.5*mm){
 	polygon(points=[[-w/2, 0], [0, r], [w/2, 0]]);
     }
     translate([0, 0, -50])cylinder(r=3 * mm/2, h=ACRYLIC_THICKNESS + ACRYLIC_TOL + 2 + 100);
+    // translate([0, r - 15 * mm, -50])cylinder(h=100, r=3.00/2*mm); //hole for hall effect magnet
   }
 }
+
 module hour_hand(r=50*mm, w=21.5*mm, h=1.5*mm){
   difference(){
     union(){
@@ -143,18 +145,19 @@ module hour_hand(r=50*mm, w=21.5*mm, h=1.5*mm){
       translate([0, 36, ACRYLIC_THICKNESS + .25*mm])scale([1, .8, 1])cylinder(r1=7/2. * mm, r2=3.2*mm, h=1.5*mm); // clip
       translate([0, 0, -RIM_THICKNESS])cylinder(r=11, h=h);
     }
-    translate([0, 0, -RIM_THICKNESS - 1])cylinder(r=8.5, h=2*h);
+    translate([0, 0, -RIM_THICKNESS - 1])cylinder(r=8.25, h=2*h);
     translate([-.5 * mm, 36 * mm-5 * mm, 2])cube([1 * mm, 10 * mm, 10 * mm]); // slot
+    //translate([0, r - 10 * mm, -50])cylinder(h=100, r=3.00/2*mm); // hall effect magnet slot
   }
 }
 
 HOUR = 9;
 MINUTE = $t * 60;
-// MINUTE = HOUR * 60 + 15;
+//MINUTE = HOUR * 60 + 15;
 // translate([0, -0, -RIM_THICKNESS])rotate(a=MINUTE/720 * 360, v=[0, 0, 1])color([.1, 1, 0])inner_gear(MINUTE);
 //color([.1, .1, 1])outer_gear(); 
-//translate([0, 0, -1.5*mm])rotate(a=MINUTE/720 * 360, v=[0, 0, 1])color([1, 0, 0])rotate(a=0, v=[0, 0, 1])hour_hand();
-translate([0, 0, -RIM_THICKNESS])translate([0, 0, 0])rotate(a=MINUTE/60 * 360, v=[0, 0, 1])minute_hand();
+translate([0, 0, -1.5*mm])rotate(a=MINUTE/720 * 360, v=[0, 0, 1])color([1, 0, 0])rotate(a=0, v=[0, 0, 1])hour_hand(w=11);
+// translate([0, 0, -RIM_THICKNESS])translate([0, 0, 0])rotate(a=MINUTE/60 * 360, v=[0, 0, 1])minute_hand(w=12);
 
 // cylinder(r=50*mm, h=100*mm); // for scale
 
