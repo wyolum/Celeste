@@ -119,26 +119,33 @@ module inner_gear(minute, N_TEETH=30){
   }
 }
 
-module minute_hand(r=65*mm, w=21.5*mm, h=RIM_THICKNESS - 0.5*mm){
+module minute_hand(r=65*mm, w=21.5*mm, h=RIM_THICKNESS - 0.5*mm,filagree=false){
 //linear_extrude(height = 2, center=true)
 //polygon(points=[[-5*mm/2, 0], [0, 65*mm], [5*mm/2, 0]]);
   difference(){
     union(){
       stepper_gear(N_TEETH=6);
       translate([0, 2*mm, -2*RIM_THICKNESS])
-	linear_extrude(height=h)
-	polygon(points=[[-w/2, 0], [0, r], [w/2, 0]]);
+	linear_extrude(height=h)
+        if (filagree){
+            translate([0,8.2,0])scale([1.3,1,1])import("filagreeminute.dxf");
+        }
+        else
+            polygon(points=[[-w/2, 0], [0, r], [w/2, 0]]);
     }
     translate([0, 0, -50])cylinder(r=3 * mm/2, h=ACRYLIC_THICKNESS + ACRYLIC_TOL + 2 + 100);
     // translate([0, r - 15 * mm, -50])cylinder(h=100, r=3.00/2*mm); //hole for hall effect magnet
   }
 }
 
-module hour_hand(r=50*mm, w=21.5*mm, h=1.5*mm){
+module hour_hand(r=50*mm, w=21.5*mm, h=1.5*mm,filagree = false){
   difference(){
     union(){
       translate([0, RIM_THICKNESS, -RIM_THICKNESS])
-	linear_extrude(height=h)
+	linear_extrude(height=h)
+        if (filagree){
+            translate([0,8.2,0])scale([1.3,1,1])import("filagreehour.dxf");
+        }else
 	polygon(points=[[-w/2, 0], [0, r], [w/2, 0]]);
       translate([0, 36, -RIM_THICKNESS])cylinder(r=5.5 * mm/2, h=ACRYLIC_THICKNESS + RIM_THICKNESS + .5*mm);
       // translate([0, 39, ACRYLIC_THICKNESS + .25])scale([1, .8, 1])cylinder(r1=3 * mm, r2=2.4*mm, h=1 * mm); // clip
@@ -156,8 +163,8 @@ MINUTE = $t * 60;
 //MINUTE = HOUR * 60 + 15;
 // translate([0, -0, -RIM_THICKNESS])rotate(a=MINUTE/720 * 360, v=[0, 0, 1])color([.1, 1, 0])inner_gear(MINUTE);
 //color([.1, .1, 1])outer_gear(); 
-translate([0, 0, -1.5*mm])rotate(a=MINUTE/720 * 360, v=[0, 0, 1])color([1, 0, 0])rotate(a=0, v=[0, 0, 1])hour_hand(w=11);
-// translate([0, 0, -RIM_THICKNESS])translate([0, 0, 0])rotate(a=MINUTE/60 * 360, v=[0, 0, 1])minute_hand(w=12);
+//translate([0, 0, -1.5*mm])rotate(a=MINUTE/720 * 360, v=[0, 0, 1])color([1, 0, 0])rotate(a=0, v=[0, 0, 1])hour_hand(w=11,filagree=true);
+ translate([0, 0, -RIM_THICKNESS])translate([0, 0, 0])rotate(a=MINUTE/60 * 360, v=[0, 0, 1])minute_hand(w=12,filagree=true);
 
 // cylinder(r=50*mm, h=100*mm); // for scale
 
