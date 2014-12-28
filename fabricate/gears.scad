@@ -94,7 +94,7 @@ module inner_gear(minute, N_TEETH=30){
   rad = 10 * mm;
   d1 = (rad + .0) * [1,0,0];
   d2 = (rad + .0) * [sin(30), cos(30), 0];
-  translate([0, 36  * mm, .1])
+  translate([0, 36  * mm, 0])
     rotate(a=360/30/4 - 66./30 * minute/60 * 360 + minute/60.*720, v=[0, 0,1])
     difference(){
     intersection(){
@@ -115,6 +115,18 @@ module inner_gear(minute, N_TEETH=30){
     for(i=[0:4]){
       rotate(a=360/5 * i, v=[0, 0, 1])translate([0, 16, -1])cylinder(r=6 * mm, h=ACRYLIC_THICKNESS + ACRYLIC_TOL + 2 + 100);
       // scale([1, 1, .3])translate([0, 0, ])rotate(a=360/5 * i, v=[0, 0, 1])translate([0, 18, -1])sphere(r=11 * mm);
+    }
+  }
+  // add in rim strip to support hour hand
+  translate([0, 0, 1])
+    union(){
+    difference(){
+      translate([0, 36*mm, 0])cylinder(r = 1*inch, h=ACRYLIC_THICKNESS);
+      translate([0, 36*mm, -1])cylinder(r = 7 * inch/8, h=ACRYLIC_THICKNESS+2);
+    }
+    difference(){
+      translate([0, 36*mm, 0])cylinder(r = 8*mm, h=ACRYLIC_THICKNESS);
+      translate([0, 36*mm, -1])cylinder(r = 4*mm, h=ACRYLIC_THICKNESS+2);
     }
   }
 }
@@ -138,7 +150,7 @@ module minute_hand(r=65*mm, w=21.5*mm, h=RIM_THICKNESS - 0.5*mm,filagree=false){
   }
 }
 
-module hour_hand(r=50*mm, w=21.5*mm, h=1.5*mm,filagree = false){
+module hour_hand(r=50*mm, w=21.5*mm, h=1.5*mm, filagree = false){
   difference(){
     union(){
       translate([0, RIM_THICKNESS, -RIM_THICKNESS])
@@ -147,9 +159,9 @@ module hour_hand(r=50*mm, w=21.5*mm, h=1.5*mm,filagree = false){
             translate([0,8.2,0])scale([1.3,1,1])import("filagreehour.dxf");
         }else
 	polygon(points=[[-w/2, 0], [0, r], [w/2, 0]]);
-      translate([0, 36, -RIM_THICKNESS])cylinder(r=5.5 * mm/2, h=ACRYLIC_THICKNESS + RIM_THICKNESS + .5*mm);
-      // translate([0, 39, ACRYLIC_THICKNESS + .25])scale([1, .8, 1])cylinder(r1=3 * mm, r2=2.4*mm, h=1 * mm); // clip
-      translate([0, 36, ACRYLIC_THICKNESS + .25*mm])scale([1, .8, 1])cylinder(r1=7/2. * mm, r2=3.2*mm, h=1.5*mm); // clip
+      // translate([0, 36, -RIM_THICKNESS])cylinder(r=5.5 * mm/2, h=ACRYLIC_THICKNESS + RIM_THICKNESS + .5*mm);
+      translate([0, 36, -RIM_THICKNESS])cylinder(r=5.5 * mm/2, h=ACRYLIC_THICKNESS + RIM_THICKNESS + 1);
+      translate([0, 36, ACRYLIC_THICKNESS + .75*mm])scale([1, .8, 1])cylinder(r1=7/2. * mm, r2=3.2*mm, h=1.5*mm); // clip
       translate([0, 0, -RIM_THICKNESS])cylinder(r=11, h=h);
     }
     translate([0, 0, -RIM_THICKNESS - 1])cylinder(r=8.25, h=2*h);
@@ -161,10 +173,11 @@ module hour_hand(r=50*mm, w=21.5*mm, h=1.5*mm,filagree = false){
 HOUR = 9;
 MINUTE = $t * 60;
 //MINUTE = HOUR * 60 + 15;
-// translate([0, -0, -RIM_THICKNESS])rotate(a=MINUTE/720 * 360, v=[0, 0, 1])color([.1, 1, 0])inner_gear(MINUTE);
-//color([.1, .1, 1])outer_gear(); 
-//translate([0, 0, -1.5*mm])rotate(a=MINUTE/720 * 360, v=[0, 0, 1])color([1, 0, 0])rotate(a=0, v=[0, 0, 1])hour_hand(w=11,filagree=true);
- translate([0, 0, -RIM_THICKNESS])translate([0, 0, 0])rotate(a=MINUTE/60 * 360, v=[0, 0, 1])minute_hand(w=12,filagree=true);
+// translate([0,0, 2])rotate(v=[0, 1, 0], a=180)
+translate([0, -0, -RIM_THICKNESS])rotate(a=MINUTE/720 * 360, v=[0, 0, 1])color([.1, 1, 0])inner_gear(MINUTE);
+// color([.1, .1, 1])outer_gear(); 
+translate([0, 0, -1.5*mm])rotate(a=MINUTE/720 * 360, v=[0, 0, 1])color([1, 0, 0])rotate(a=0, v=[0, 0, 1])hour_hand(w=11,filagree=true);
+// translate([0, 0, -RIM_THICKNESS])translate([0, 0, 0])rotate(a=MINUTE/60 * 360, v=[0, 0, 1])minute_hand(w=12,filagree=true);
 
 // cylinder(r=50*mm, h=100*mm); // for scale
 

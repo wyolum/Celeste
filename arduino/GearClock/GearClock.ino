@@ -8,22 +8,31 @@
 // to motor port #2 (M3 and M4)
 const int STEPS_PER_REV = 48;
 AF_Stepper motor(STEPS_PER_REV, 2);
-const int DT = 75;
+// const int DT = 3600/STEPS_PER_REV;
+const int DT = 1;
 
-uint32_t next_step_time;
-
-time_t _last_tick = 0;
+time_t _next_tick = 0;
 void setup() {
+  uint8_t ahh, amm, ass, spm, is_set;
+  time_t t;
+
   Serial.begin(115200);
   Serial.println("Gear Clock");
   Serial.println("WyoLum 2014");
   Serial.println("Buy Open Hardware and own your future!");
   
   Wire.begin();
+
+  /// total reset
+  t = getTime();
+  ahh = (t / 3600);
+  amm = (t  - ahh * 3600) / 60;
+  ahh = t % 60 ;
+  setRTC_alarm(ahh, amm, ass, 0);
+
   motor.setSpeed(40);  // 10 rpm   
   
   uint32_t now = getTime();
-  next_step_time = now + DT - now % DT;
   pinMode(13, OUTPUT);
   //digitalWrite(13, HIGH);
   // delay(100);
@@ -32,29 +41,42 @@ void setup() {
   delay(100);
   motor.step(1, BACKWARD, SINGLE); // 48 steps
   delay(100);
-  _last_tick = getTime();
+
+  // alarm time on RTC is the next tick time.
+  getRTC_alarm(&ahh, &amm, &ass, &is_set);
+  _next_tick = ahh * 3600 + amm * 60 + ass + DT;
+  
+  int togo = int(_next_tick) - (int)(getTime() % 86400);
+  Serial.println(togo / DT);
+  if(togo > 0){
+    motor.step(togo / DT, FORWARD, SINGLE);
+  }
 }
 
 void loop(){
-  /*while(getTime() < next_step_time){
-    delay((next_step_time - getTime()) * 1000);
-  }
-  next_step_time += DT;
-  Serial.println(getTime());
-  motor.step(2 * 1, FORWARD, INTERLEAVE); 
-  */
-  //motor.step(48, FORWARD, SINGLE); // 48 steps
-  //motor.step(48, FORWARD, DOUBLE); // 48 steps
-  // motor.step(48, FORWARD, INTERLEAVE); // 48 steps
-  time_t tick = _last_tick +  3600 / STEPS_PER_REV;
+  time_t togo, t;
+  uint8_t hh, mm, ss;
   motor.release();
-  while(getTime() < tick){
-    delay(10);
-    //Serial.print(tick - getTime());
-    //Serial.println(" togo");
+
+  t = getTime() % 86400;
+  _next_tick = t + 10;
+
+  togo = t + _next_tick;
+  Serial.println(togo);
+  while(togo > 0){
+    t = getTime() % 86400;
+    togo = _next_tick - t;
+    delay(1000);
+    Serial.print("    ");
+    Serial.print(_next_tick);
+    Serial.print(" ");
+    Serial.println(togo);
   }
-  _last_tick = tick;
-  motor.step(1, FORWARD, SINGLE); // 48 steps
-  // motor.onestep(FORWARD, INTERLEAVE);
-  // delay(74000);
+  _next_tick += DT;
+  uint8_t ahh, amm, ass, aset;
+  ahh = (_next_tick / 3600) % 12;
+  amm = (_next_tick - 3600 * ahh) / 60;
+  ass = _next_tick % 60;
+  setRTC_alarm(ahh, amm, ass, 0);
+  motor.step(1, FORWARD, SINGLE);
 }
