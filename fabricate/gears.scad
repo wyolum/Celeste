@@ -102,8 +102,8 @@ module inner_gear(minute, N_TEETH=30){
       scale([1, 1, 1])gear (number_of_teeth=N_TEETH,
 	    circular_pitch = PITCH,
 			    gear_thickness = ACRYLIC_THICKNESS/2,
-	    rim_thickness = ACRYLIC_THICKNESS - ACRYLIC_TOL,
-	    hub_thickness = ACRYLIC_THICKNESS - ACRYLIC_TOL,
+			    rim_thickness = ACRYLIC_THICKNESS, //   - ACRYLIC_TOL,
+			    hub_thickness = ACRYLIC_THICKNESS, //  - ACRYLIC_TOL,
 	    bore_diameter=0. * mm,
 	    circles=0,
 	    pressure_angle=28
@@ -177,7 +177,7 @@ MINUTE = $t * 60;
 translate([0, -0, -RIM_THICKNESS])rotate(a=MINUTE/720 * 360, v=[0, 0, 1])color([.1, 1, 0])inner_gear(MINUTE);
 // color([.1, .1, 1])outer_gear(); 
 translate([0, 0, -1.5*mm])rotate(a=MINUTE/720 * 360, v=[0, 0, 1])color([1, 0, 0])rotate(a=0, v=[0, 0, 1])hour_hand(w=11,filagree=true);
-// translate([0, 0, -RIM_THICKNESS])translate([0, 0, 0])rotate(a=MINUTE/60 * 360, v=[0, 0, 1])minute_hand(w=12,filagree=true);
+translate([0, 0, -RIM_THICKNESS])translate([0, 0, 0])rotate(a=MINUTE/60 * 360, v=[0, 0, 1])minute_hand(w=12,filagree=true);
 
 // cylinder(r=50*mm, h=100*mm); // for scale
 
