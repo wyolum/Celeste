@@ -8,13 +8,30 @@
 // to motor port #2 (M3 and M4)
 const int STEPS_PER_REV = 48;
 AF_Stepper motor(STEPS_PER_REV, 2);
-// const int DT = 3600/STEPS_PER_REV;
-const int DT = 1;
+const int DT = 3600/STEPS_PER_REV;
 
 time_t _next_tick = 0;
+
+time_t read_next_tick(){
+  uint8_t *time_bytes_p;
+  time_t out;
+  
+  time_bytes_p = (uint8_t*)(&out);  
+  rtc_raw_read(DS3231_ALARM1_OFSET, 4, false, time_bytes_p);
+  return out;
+}
+
+time_t write_next_tick(time_t next_tick){
+  uint8_t *time_bytes_p;
+  
+  time_bytes_p = (uint8_t*)(&next_tick);  
+  rtc_raw_write(DS3231_ALARM1_OFSET, 4, false, time_bytes_p);
+}
+
 void setup() {
-  uint8_t ahh, amm, ass, spm, is_set;
-  time_t t;
+  uint8_t n_tick;
+  int i;
+  time_t current_time, last_tick;
 
   Serial.begin(115200);
   Serial.println("Gear Clock");
@@ -22,61 +39,76 @@ void setup() {
   Serial.println("Buy Open Hardware and own your future!");
   
   Wire.begin();
-
-  /// total reset
-  t = getTime();
-  ahh = (t / 3600);
-  amm = (t  - ahh * 3600) / 60;
-  ahh = t % 60 ;
-  setRTC_alarm(ahh, amm, ass, 0);
-
-  motor.setSpeed(40);  // 10 rpm   
+  // setRTC(10*3600 + 12 * 60);
+  motor.setSpeed(10);  // 10 rpm   
   
-  uint32_t now = getTime();
+  // go indef to test mechanics
+  /*
+  while(1){
+    for(i = 0; i < STEPS_PER_REV; i++){
+      motor.step(1, FORWARD, SINGLE); // 48 steps
+      
+    }
+    delay(1000);
+    }*/
   pinMode(13, OUTPUT);
   //digitalWrite(13, HIGH);
   // delay(100);
   digitalWrite(13, LOW);
-  motor.step(1, FORWARD, SINGLE); // 48 steps
-  delay(100);
-  motor.step(1, BACKWARD, SINGLE); // 48 steps
-  delay(100);
 
   // alarm time on RTC is the next tick time.
-  getRTC_alarm(&ahh, &amm, &ass, &is_set);
-  _next_tick = ahh * 3600 + amm * 60 + ass + DT;
+  current_time = getTime();
+  // write_next_tick(current_time - 20 * DT); // ### DBG
+
+
+  _next_tick = read_next_tick();
+
+  last_tick = _next_tick - DT;
+  // catch up to number of steps in cycle
+  if((last_tick / DT) % 4 == 1){
+    motor.step(1, FORWARD, SINGLE);
+  }
+  if((last_tick / DT) % 4 == 2){
+    motor.step(2, FORWARD, SINGLE);
+  }
+  if((last_tick / DT) % 4 == 3){
+    motor.step(1, BACKWARD, SINGLE);
+  }
+ 
   
-  int togo = int(_next_tick) - (int)(getTime() % 86400);
-  Serial.println(togo / DT);
-  if(togo > 0){
-    motor.step(togo / DT, FORWARD, SINGLE);
+  if(current_time > _next_tick){
+    last_tick = _next_tick;
+    _next_tick = current_time - (current_time) % DT  + DT;
+    n_tick = ((current_time - last_tick) % (86400 / 2)) / DT + 1;
+    Serial.print("current_time + n_tick * DT: ");
+    Serial.println(current_time + n_tick * DT);
+    Serial.print("                         _next_tick: ");
+    Serial.println(_next_tick);
+    for(i = 0; i < n_tick; i++){
+      motor.step(1, FORWARD, SINGLE);
+      write_next_tick(_next_tick - (n_tick - 1) * DT);
+    }
+    Serial.print("_next_tick: ");
+    Serial.println(_next_tick);
+    write_next_tick(_next_tick);
+    Serial.print("read_next_tick(): ");
+    Serial.println(read_next_tick());
+    Serial.print("_next_tick - getTime(): ");
+    Serial.println(_next_tick - getTime());
   }
 }
 
 void loop(){
-  time_t togo, t;
+  int togo;
   uint8_t hh, mm, ss;
   motor.release();
 
-  t = getTime() % 86400;
-  _next_tick = t + 10;
-
-  togo = t + _next_tick;
-  Serial.println(togo);
-  while(togo > 0){
-    t = getTime() % 86400;
-    togo = _next_tick - t;
+  while(_next_tick > getTime()){
+    togo = _next_tick - getTime();
     delay(1000);
-    Serial.print("    ");
-    Serial.print(_next_tick);
-    Serial.print(" ");
     Serial.println(togo);
   }
-  _next_tick += DT;
-  uint8_t ahh, amm, ass, aset;
-  ahh = (_next_tick / 3600) % 12;
-  amm = (_next_tick - 3600 * ahh) / 60;
-  ass = _next_tick % 60;
-  setRTC_alarm(ahh, amm, ass, 0);
   motor.step(1, FORWARD, SINGLE);
+  _next_tick += DT;
+  write_next_tick(_next_tick);
 }
