@@ -40,17 +40,18 @@ void setup() {
   
   Wire.begin();
   // setRTC(10*3600 + 12 * 60);
-  motor.setSpeed(10);  // 10 rpm   
+  motor.setSpeed(40);  // 10 rpm   
+  motor.step(1, FORWARD, SINGLE); // 48 steps
+  motor.step(1, BACKWARD, SINGLE); // 48 steps
+  // while(1) delay(100); // hold in place while setting alignment.
   
-  // go indef to test mechanics
   /*
+  // spin indef to test mechanics
   while(1){
-    for(i = 0; i < STEPS_PER_REV; i++){
-      motor.step(1, FORWARD, SINGLE); // 48 steps
-      
-    }
-    delay(1000);
-    }*/
+    motor.step(STEPS_PER_REV, FORWARD, SINGLE); // 48 steps
+    delay(200);
+  }
+  */
   pinMode(13, OUTPUT);
   //digitalWrite(13, HIGH);
   // delay(100);
@@ -58,7 +59,7 @@ void setup() {
 
   // alarm time on RTC is the next tick time.
   current_time = getTime();
-  // write_next_tick(current_time - 20 * DT); // ### DBG
+  // write_next_tick(current_time - 48 * DT); // ### DBG
 
 
   _next_tick = read_next_tick();
