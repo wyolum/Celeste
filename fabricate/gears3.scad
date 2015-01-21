@@ -59,6 +59,56 @@ module stepper_gear(N_TEETH=6){
   }
 }
 
+module ring_gear(N_TEETH=66, lash=0){
+  PITCH_R = N_TEETH * PITCH / 360.;
+  PITCH_D = 2 * PITCH_R;
+  PITCH_DIAMETRIAL = N_TEETH / PITCH_D;
+  // Addendum: Radial distance from pitch circle to outside circle.
+  ADDENDUM = 1 / PITCH_DIAMETRIAL;
+  
+  //Outer Circle
+  OUTER_RADIUS = PITCH_R + ADDENDUM;
+  OUTER_DIAMETER = 2 * OUTER_RADIUS;
+  
+  MARGIN = 1 * inch;
+  xxx = 69.5 * mm;
+  difference(){
+    cylinder(r=xxx, h=ACRYLIC_THICKNESS + ACRYLIC_TOL);
+    translate([0, 0, -1])cylinder(r=xxx-.8*mm, h=ACRYLIC_THICKNESS + ACRYLIC_TOL + 2);
+  }
+  difference(){
+    translate([0, 0, 0])
+      scale([67.5/66., 67.5/66., 1])gear(number_of_teeth=N_TEETH,
+				 circular_pitch = PITCH,
+				 gear_thickness = ACRYLIC_THICKNESS + ACRYLIC_TOL,
+				 rim_thickness = ACRYLIC_THICKNESS + ACRYLIC_TOL,
+				 hub_thickness = ACRYLIC_THICKNESS + ACRYLIC_TOL,
+				 bore_diameter=0. * mm,
+				 circles=0,
+				 pressure_angle=28,
+				 backlash=0 // play with this
+				 );
+    translate([0, 0, -1])
+      scale([1.00, 1.00, 2])gear(number_of_teeth=N_TEETH,
+				 circular_pitch = PITCH,
+				 gear_thickness = ACRYLIC_THICKNESS + ACRYLIC_TOL,
+				 rim_thickness = ACRYLIC_THICKNESS + ACRYLIC_TOL,
+				 hub_thickness = ACRYLIC_THICKNESS + ACRYLIC_TOL,
+				 bore_diameter=0. * mm,
+				 circles=0,
+				 pressure_angle=28,
+				 backlash=0 // play with this
+				 );
+    cylinder(h=ACRYLIC_THICKNESS + ACRYLIC_TOL, r=OUTER_RADIUS-3.5); // trim teeth
+  }
+  for(i=[0:12])rotate(a=i*360/12, v=[0, 0, 1])translate([69*mm,0*mm,0])
+		 difference(){
+      cylinder(r=3*mm, h = ACRYLIC_THICKNESS + ACRYLIC_TOL);
+      translate([-6*mm,-3*mm, -1])cube([6*mm, 6*mm, ACRYLIC_THICKNESS + 2]);
+      translate([-0*mm,-0*mm, -1])cube([6*mm, 6*mm, ACRYLIC_THICKNESS + 2]);
+    }
+}
+
 module outer_gear(N_TEETH=66, lash=0){
   PITCH_R = N_TEETH * PITCH / 360.;
   PITCH_D = 2 * PITCH_R;
@@ -78,7 +128,7 @@ difference() {
     cylinder(r=OUTER_RADIUS  +  MARGIN, h=ACRYLIC_THICKNESS + ACRYLIC_TOL);
     //cylinder(r=OUTER_RADIUS + 3, h=ACRYLIC_THICKNESS + ACRYLIC_TOL);
     translate([0, 0, -1])
-      scale([1.005, 1.005, 1])gear(number_of_teeth=N_TEETH,
+      scale([1.00, 1.00, 1])gear(number_of_teeth=N_TEETH,
 	   circular_pitch = PITCH,
 	   gear_thickness = ACRYLIC_THICKNESS + ACRYLIC_TOL + 2,
 	   rim_thickness = ACRYLIC_THICKNESS + ACRYLIC_TOL + 2,
@@ -88,7 +138,7 @@ difference() {
 	   pressure_angle=28,
 	   backlash=0 // play with this
 	   );
-    cylinder(h=ACRYLIC_THICKNESS + ACRYLIC_TOL, r=OUTER_RADIUS-3); // trim teeth
+    cylinder(h=ACRYLIC_THICKNESS + ACRYLIC_TOL, r=OUTER_RADIUS-3.5); // trim teeth
   }
   }
   //for(i=[0:12])rotate(a=i*360/12, v=[0, 0, 1])translate([69*mm,-.8*mm,0])cube([3*mm, 1.6*mm, ACRYLIC_THICKNESS]);
@@ -255,7 +305,7 @@ module anti_lash_gear_top(minute, N_TEETH=30, h=ACRYLIC_THICKNESS/2, lash=0){
   }
 }
 
-module inner_gear(minute, N_TEETH=30, h=ACRYLIC_THICKNESS){
+module planet_gear(minute, N_TEETH=30, h=ACRYLIC_THICKNESS){
   ACRYLIC_THICKNESS = h;
   PITCH_R = N_TEETH * PITCH / 360.;
   PITCH_D = 2 * PITCH_R;
@@ -310,7 +360,7 @@ module minute_hand(r=65*mm, w=21.5*mm, h=RIM_THICKNESS - 0.5*mm,filagree=false){
 //polygon(points=[[-5*mm/2, 0], [0, 65*mm], [5*mm/2, 0]]);
   difference(){
     union(){
-      stepper_gear(N_TEETH=6);
+      rotate(v=[0, 0, 1], a=5/60*360)stepper_gear(N_TEETH=6);
       translate([0, 2*mm, -2*RIM_THICKNESS])
 	linear_extrude(height=h)
         if (filagree){
@@ -319,8 +369,9 @@ module minute_hand(r=65*mm, w=21.5*mm, h=RIM_THICKNESS - 0.5*mm,filagree=false){
         else
             polygon(points=[[-w/2, 0], [0, r], [w/2, 0]]);
     }
-    translate([0, 0, 0])cylinder(r=2.5 * mm, h=ACRYLIC_THICKNESS + ACRYLIC_TOL + 2 + 100);
-    // translate([0, r - 15 * mm, -50])cylinder(h=100, r=3.00/2*mm); //hole for hall effect magnet
+    translate([0, 0, 0])cylinder(r=2.40 * mm, h=ACRYLIC_THICKNESS + ACRYLIC_TOL + 2 + 100);
+    rotate(v=[0, 0, 1], a=5/60*360)translate([-5*mm, -.5*mm, 8*mm])cube([10*mm, 1*mm, 10*mm]); // slot
+    translate([0, 0, 11.51*mm])cylinder(r2=3.5, r1=2.49 * mm, h=.5*mm); // taper
   }
 }
 
@@ -349,12 +400,10 @@ HOUR = 9;
 MINUTE = $t * 60;
 //MINUTE = HOUR * 60 + 15;
 // translate([0,0, 2])rotate(v=[0, 1, 0], a=180)
-// translate([0, -0, -RIM_THICKNESS])rotate(a=MINUTE/720 * 360, v=[0, 0, 1])color([.1, 1, 0])inner_gear(MINUTE);
-// color([.1, .1, 1])outer_gear(); 
-// translate([0, 0, -1.5*mm])rotate(a=MINUTE/720 * 360, v=[0, 0, 1])color([1, 0, 0])rotate(a=0, v=[0, 0, 1])hour_hand(w=11,filagree=true);
+// translate([0, -0, -RIM_THICKNESS])rotate(a=MINUTE/720 * 360, v=[0, 0, 1])color([.1, 1, 0])planet_gear(MINUTE);
+//color([.1, .1, 1])ring_gear();
+translate([0, 0, -1.5*mm])rotate(a=MINUTE/720 * 360, v=[0, 0, 1])color([1, 0, 0])rotate(a=0, v=[0, 0, 1])hour_hand(w=11,filagree=true);
 translate([0, 0, -2*RIM_THICKNESS])translate([0, 0, 0])rotate(a=MINUTE/60 * 360, v=[0, 0, 1])minute_hand(w=12,filagree=true);
+translate([36/sqrt(2), 36/sqrt(2), 0]) cube([3*mm, 3*mm, 3*mm]);
 
-lash = 0;
-//      anti_lash_gear(lash=lash);
-// color([1, 0, 1])translate([0, -0, +ACRYLIC_THICKNESS/2 + ACRYLIC_TOL])anti_lash_gear_top(lash=lash, H=ACRYLIC_THICKNESS);
-// translate([130, 0, 0])cylinder(r=50*mm, h=1*mm); // for scale
+translate([0, 0, ACRYLIC_THICKNESS + ACRYLIC_TOL])anti_lash_gear();
