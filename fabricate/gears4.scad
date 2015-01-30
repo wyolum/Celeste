@@ -417,12 +417,13 @@ module minute_hand(thickness, h=1.5*mm){
   }
 }
 
-module hour_hand(thickness, h=1.5*mm){
+module hour_hand(thickness){
+  h = thickness/2;
   rotate(a=-90, v=[0, 0, 1])translate([0, 0, -3*thickness])difference(){
     union(){
       translate([0, h, -h])linear_extrude(height=h)translate([0,8.2,0])scale([1.,1.025,1])import("filagreehour.dxf"); 
       translate([0, 36, -h])cylinder(r=4.0 * mm/2, h=h+.6*thickness);
-      translate([0, 36, thickness-1*mm])scale([1, .8, 1])cylinder(r1=2.4 * mm, r2=2*mm, h=1*mm); // clip
+      translate([0, 36, thickness-1*mm])scale([1, .8, 1])cylinder(r1=2.6 * mm, r2=2*mm, h=1*mm); // clip (r1=2.4 was too small)
       translate([0, 0, -h])cylinder(r=11, h=h);
     }
     translate([0, 0, -2*h - 1])cylinder(r=7.85, h=3*h);
@@ -460,13 +461,11 @@ color([0, 1, 0])union(){                        // 2 Reduction gear 59 tooth: 5 
   }
 }
 
-*/
 color([1, 0, 0])union(){                        // 3 Reduction gear 54 tooth: 6 tooth
   // translate([0, 0, 1.5*gear_thickness])cylinder(h=gear_thickness, r=57*mm); //measure
   translate([0, 0, gear_thickness])my_gear(54, bore_d, gear_thickness);
   translate([0, 0, gear_thickness])rotate(a=180/6, v=[0, 0, 1])my_gear(6, bore_d, 2 * acr_thickness + .5 * gear_thickness);
 }
-/*
 
 translate([-36*mm, 0, 2*gear_thickness])             // 4 Planet gear
 //rotate(v=[1, 0, 0], a=180)  // (flip for printing)
@@ -474,17 +473,18 @@ difference(){
   my_gear(30, bore_d, gear_thickness);
   translate([0, 0, -0.9*mm])cylinder(r=4.25*mm, h=2*mm);
 }
+*/
 
 color([0, 1, 0])                               // 5 Hour hand
-rotate(v=[0, 1, 0], a=180)hour_hand(gear_thickness, gear_thickness/2); 
+rotate(v=[0, 1, 0], a=180)hour_hand(gear_thickness, gear_thickness/3); 
 
 
+/*
 // translate([0, 0, 2*gear_thickness]) // explode      // 6 Ring gear
 translate([0, 0, 2*gear_thickness])ring_gear(thickness=gear_thickness);
 
 // translate([0, 0, 10 * gear_thickness]) // explode   // 7 Second hand
-translate([0, 0, 3 * acr_thickness + .5 * gear_thickness])second_hand(h=gear_thickness/2.);
-
+translate([0, 0, 3 * acr_thickness + .5 * gear_thickness])second_hand(h=gear_thickness/3.);
 // translate([0, 0, 5*gear_thickness]) // explode      // 8 Minute hand
-translate([0, 0, gear_thickness])color([0, 0, 1])rotate(v=[0, 1, 0], a=180)minute_hand(gear_thickness, gear_thickness/2.);
+translate([0, 0, gear_thickness])color([0, 0, 1])rotate(v=[0, 1, 0], a=180)minute_hand(gear_thickness, gear_thickness/3.);
 */

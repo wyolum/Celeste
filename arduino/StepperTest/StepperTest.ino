@@ -93,7 +93,8 @@ bool mode = 0;
 int count = 0;
 int pw_us = 1000;
 void loop(){
-  setSpeed(4);
+  // setSpeed(0);// fast
+  setSpeed(4); // 32 usteps per step?
   Serial.println("HERE");
   //  digitalWrite(13, HIGH);
   digitalWrite(nENABLE_PIN, ENABLED);
@@ -103,8 +104,7 @@ void loop(){
     digitalWrite(STEP_PIN, LOW);
     delayMicroseconds(pw_us / 2);
   }
-  digitalWrite(nENABLE_PIN, DISABLED);
-  delay(60000/200. - 32 * pw_us/1000);
+  digitalWrite(nENABLE_PIN, DISABLED); delay(60000/200. - 32 * pw_us/1000);
   return;
   Serial.print("    [");
   delay(100);
