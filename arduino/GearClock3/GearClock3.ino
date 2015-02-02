@@ -6,29 +6,81 @@ const int nENABLE_PIN = 2;
 const int nSLEEP_PIN = 3;
 const int STEP_PIN = 4;
 const int DIR_PIN = 5;
-const int M0_PIN = 4;
-const int M1_PIN = 5;
-const int DUMMY_STEP = 1; // hack since stepper wont sleep on each step :(
+const int M0_PIN = 6;
+const int M1_PIN = 7;
+const int N_STEP = 200;
+const bool CW = false;
+const bool CCW = !CW;
+const bool ENABLED = false;
+const bool DISABLED = !ENABLED;
 
 // Connect a stepper motor with 48 steps per revolution (7.5 degree)
 // to motor port #2 (M3 and M4)
-const int STEPS_PER_REV = 200 / DUMMY_STEP;
+const int STEPS_PER_REV = 200;
 
 const int DT = 3600/STEPS_PER_REV;
 const unsigned int PULSE_DURATION_uS = 4000;
-const bool CW = true;
-const bool CCW = !CW;
+
+void setSpeed(int speed){
+  switch(speed){
+  case 0:
+    pinMode(M0_PIN, OUTPUT);
+    pinMode(M1_PIN, OUTPUT);
+    digitalWrite(M0_PIN, LOW);
+    digitalWrite(M0_PIN, LOW);
+    break;
+  case 1:
+    pinMode(M0_PIN, OUTPUT);
+    pinMode(M1_PIN, OUTPUT);
+    digitalWrite(M0_PIN, LOW);
+    digitalWrite(M0_PIN, HIGH);
+    break;
+  case 2:
+    pinMode(M0_PIN, OUTPUT);
+    pinMode(M1_PIN, OUTPUT);
+    digitalWrite(M0_PIN, HIGH);
+    digitalWrite(M0_PIN, LOW);
+    break;
+  case 3:
+    pinMode(M0_PIN, OUTPUT);
+    pinMode(M1_PIN, OUTPUT);
+    digitalWrite(M0_PIN, HIGH);
+    digitalWrite(M0_PIN, HIGH);
+    break;
+  case 4:
+    pinMode(M0_PIN, INPUT);
+    pinMode(M1_PIN, OUTPUT);
+    digitalWrite(M0_PIN, LOW);
+    digitalWrite(M0_PIN, LOW);
+    break;
+  case 5:
+    pinMode(M0_PIN, INPUT);
+    pinMode(M1_PIN, OUTPUT);
+    digitalWrite(M0_PIN, LOW);
+    digitalWrite(M0_PIN, HIGH);
+    break;
+  case 6:
+    pinMode(M0_PIN, INPUT);
+    pinMode(M1_PIN, OUTPUT);
+    digitalWrite(M0_PIN, HIGH);
+    digitalWrite(M0_PIN, LOW);
+    break;
+  case 7:
+    pinMode(M0_PIN, INPUT);
+    pinMode(M1_PIN, OUTPUT);
+    digitalWrite(M0_PIN, HIGH);
+    digitalWrite(M0_PIN, HIGH);
+    break;
+  }
+}
 
 void step(bool dir){
-  digitalWrite(nENABLE_PIN, HIGH);
+  digitalWrite(nENABLE_PIN, ENABLED); 
   digitalWrite(DIR_PIN, dir);
-  for(int i=0; i<DUMMY_STEP; i++){
-    digitalWrite(STEP_PIN, HIGH);
-    delayMicroseconds(PULSE_DURATION_uS / 2);
-    digitalWrite(STEP_PIN, LOW);
-    delayMicroseconds(PULSE_DURATION_uS / 2);
-  }
-  digitalWrite(nENABLE_PIN, LOW);
+  digitalWrite(STEP_PIN, HIGH);
+  delayMicroseconds(PULSE_DURATION_uS / 2);
+  digitalWrite(STEP_PIN, LOW);
+  delayMicroseconds(PULSE_DURATION_uS / 2);
 }
 
 void step(bool dir, int n){
@@ -53,25 +105,28 @@ time_t write_next_tick(time_t next_tick){
   
   time_bytes_p = (uint8_t*)(&next_tick);  
   rtc_raw_write(DS3231_ALARM1_OFSET, 4, false, time_bytes_p);
+  Serial.print("next_tick written: ");
+  Serial.println(next_tick);
 }
 
 void setup() {
   uint8_t n_tick;
   int i;
   time_t current_time, last_tick;
-
+  setSpeed(0);
   Serial.begin(115200);
   Serial.println("Gear Clock");
   Serial.println("WyoLum 2014");
   Serial.println("Buy Open Hardware and own your future!");
-  
+  Serial.println(DT);
+
   pinMode(STEP_PIN, OUTPUT);
   pinMode(nENABLE_PIN, OUTPUT);
   pinMode(nSLEEP_PIN, OUTPUT);
   pinMode(DIR_PIN, OUTPUT);
 
   digitalWrite(STEP_PIN, LOW);
-  digitalWrite(nENABLE_PIN, HIGH);
+  digitalWrite(nENABLE_PIN, ENABLED);
   digitalWrite(nSLEEP_PIN, LOW);
 
   Wire.begin();
@@ -80,13 +135,13 @@ void setup() {
   // while(1) delay(100); // hold in place while setting alignment.
   
   // spin indef to test mechanics
+  /*
   while(1){
     for(i = 0; i < STEPS_PER_REV; i++){
       step(CW);
     }
     delay(800);
   }
-  /*
   */
   pinMode(13, OUTPUT);
   //digitalWrite(13, HIGH);
@@ -95,12 +150,18 @@ void setup() {
 
   // alarm time on RTC is the next tick time.
   current_time = getTime();
+  Serial.print("current_time: ");
+  Serial.println(current_time);
   // write_next_tick(current_time - 48 * DT); // ### DBG
 
 
   _next_tick = read_next_tick();
 
   last_tick = _next_tick - DT;
+  Serial.print("   last_tick: ");
+  Serial.println(last_tick);
+  Serial.print("  _next_tick: ");
+  Serial.println(_next_tick);
   // catch up to number of steps in cycle
   if((last_tick / DT) % 4 == 1){
     step(CW);
@@ -140,6 +201,7 @@ void loop(){
   int togo;
   uint8_t hh, mm, ss;
 
+  digitalWrite(nENABLE_PIN, DISABLED); 
   while(_next_tick > getTime()){
     togo = _next_tick - getTime();
     delay(1000);
