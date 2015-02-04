@@ -398,7 +398,7 @@ module second_hand(h=1.5*mm){
     union(){
       translate([0, -1*mm, 0])linear_extrude(height=h)
 	translate([0,8.2,0])scale([1.0,1,1])import("second_hand.dxf");
-      translate([0, 0mm, 0])cylinder(r = 9.5*mm, h=h);
+      translate([0, 0 * mm, 0])cylinder(r = 9.5*mm, h=h);
     }
     translate([0, 0, -1])cylinder(r=2. * mm, h=h + 100);
     for(i=[0:4]){
@@ -455,7 +455,8 @@ acr_thickness = 3.5*mm; // was set to this for some reason
 acr_thickness = 2.8*mm;
 h=1.5*mm;
 key_width = 8*mm;
-explode = $t * 15; // 15*mm
+explode = $t * 40; // 15*mm
+explode = .1 * mm;
 
 difference(){                                     // 1 Drive gear
   color([0, 0, 0])
@@ -471,11 +472,13 @@ union(){
 // 2.1 reducing gear (acrylic) 50,5 with 3d printed inner gear
 //scale(3.54331) //scale for svg file
 translate([0, 0,  3* explode]) // explode
-color([1, 1, 1])
+translate([0, 0,  0]) 
+color([0, 1, 1])
 translate([59, 0, 0])difference(){
   my_gear(50, bore_d, acr_thickness);
-  translate([0,0,-1])scale([1.025, 1.025, 1])my_gear(5, screw_d, acy_thickness + 2);
+  translate([0,0,-1])scale([1.025, 1.025, 1])my_gear(5, screw_d, acr_thickness + 2);
 }
+translate([0, 0,  2 * acr_thickness]) 
 color([0, 0, 0])translate([59, 0, 0*mm])difference(){
     my_gear(5, screw_d, 2 * gear_thickness - .5*mm);
     translate([0, 0, 2 * gear_thickness - 2.5*mm])cylinder(h=gear_thickness + 1, r=5.5*mm / 2);
@@ -485,21 +488,22 @@ color([0, 0, 0])translate([59, 0, 0*mm])difference(){
 // 3.1 reducing gear (acr)
 // scale(3.54331) //scale for svg file
 translate([0, 0, 1 * explode]) // explode
-color([1, 1, 1])translate([0, 0, gear_thickness])difference(){
+color([1, 1, 0])translate([0, 0, gear_thickness + acr_thickness])difference(){
   my_gear(54, bore_d, acr_thickness);
   translate([0,0,-1])translate([-key_width/2, -key_width/2, 0])cube([key_width, key_width,acr_thickness + 2]);
 }
 
 
 translate([0, 0, 3 * explode]) // explode
-translate([-36*mm, 0, 2*gear_thickness])             // 4 Planet gear
+translate([-36*mm, 0, 3*gear_thickness])             // 4 Planet gear
 //rotate(v=[1, 0, 0], a=180)  // (flip for printing)
-color([1, 1, 1])difference(){                      
+color([1, 0, 1])difference(){                      
   my_gear(30, bore_d, gear_thickness);
   translate([0, 0, -0.9*mm])cylinder(r=4.25*mm, h=2*mm);
 }
 
 translate([0, 0, 4 * explode]) // explode // 5 Hour hand
+translate([0, 0, gear_thickness])
 color([0, 1, 0])                               
 rotate(v=[0, 1, 0], a=180)hour_hand(gear_thickness, hand_thickness=gear_thickness/3.);
 
@@ -513,10 +517,11 @@ difference(){
 }
 
 translate([0, 0, 6 * explode]) // explode // 7 second hand
-color([1, 0, 0])translate([0, 0, 4 * acr_thickness + .5 * gear_thickness])second_hand(h=gear_thickness/3.);
+color([1, 0, 0])translate([0, 0, 5 * acr_thickness + .5 * gear_thickness])second_hand(h=gear_thickness/3.);
 
 // translate([0, 0, 5*gear_thickness]) // explode      // 8 Minute hand
 translate([0, 0, 5 * explode]) // explode
+translate([0, 0, gear_thickness])
 translate([0, 0, gear_thickness])color([0, 0, 1])rotate(v=[0, 1, 0], a=180)minute_hand(gear_thickness, gear_thickness/3., key_width);
 
 // Stackup
@@ -530,16 +535,28 @@ module mount_bores(radius, thickness){
   }
 }
 
-for(i=[-8:-2]){
-color([1, 0, 0])
-translate([0, 0, i * explode])
-translate([0, 0, i * acr_thickness])
-difference(){
-  rotate(a=90, v=[0, 0,1])linear_extrude(height=acr_thickness)import("GearClock4_outline.dxf"); 
-  rotate(a=45, v=[0,0,1])translate([-28.25*mm/2, -28.25*mm/2, -1])cube([28.25*mm, 28.25*mm, acr_thickness + 2]);
-  translate([0, 0, -1])mount_bores(2.5*mm, acr_thickness+2);
+for(i=[-8:-6]){
+  color([1, 1, 0])
+    translate([0, 0, i * explode])
+    translate([0, 0, i * acr_thickness])
+    difference(){
+    rotate(a=90, v=[0, 0,1])linear_extrude(height=acr_thickness)import("GearClock4_outline.dxf"); 
+    rotate(a=45, v=[0,0,1])translate([-28.25*mm/2, -28.25*mm/2, -1])cube([28.25*mm, 28.25*mm, acr_thickness + 2]);
+    translate([0, 0, -1])mount_bores(3.5*mm/2, acr_thickness+2);
+  }
 }
-}
+
+for(i=[-6:-2]){
+  color([1, 0, 0])
+    translate([0, 0, i * explode])
+    translate([0, 0, i * acr_thickness])
+    difference(){
+    rotate(a=90, v=[0, 0,1])linear_extrude(height=acr_thickness)import("GearClock4_outline.dxf"); 
+    rotate(a=45, v=[0,0,1])translate([-28.25*mm/2, -28.25*mm/2, -1])cube([28.25*mm, 28.25*mm, acr_thickness + 2]);
+    translate([0, 0, -1])mount_bores(2.5*mm, acr_thickness+2);
+  }
+ }
+
 
 color([1, 1, 1])
 translate([0, 0, -explode])
@@ -552,7 +569,6 @@ difference(){
   }
   translate([0, 0, -1])mount_bores(2.5*mm, acr_thickness+2);
 }
-
 color([0, 0, 0])
 translate([0, 0,  0])
 difference(){
@@ -563,6 +579,7 @@ difference(){
   }
   translate([0, 0, -1])mount_bores(2.5*mm, acr_thickness+2);
 }
+
 
 color([1, 1, 1])
 translate([0, 0,  1*explode])
@@ -595,7 +612,7 @@ difference(){
   translate([0, 0, -1])my_gear(66, 0, acr_thickness + 2);
 }
 
-color([0, 0, 0])
+color([0, 1, 1, .3])
 translate([0, 0,  4 * explode])
 translate([0, 0,  4 * acr_thickness])
 difference(){
