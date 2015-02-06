@@ -1,4 +1,4 @@
-const int nENABLE_PIN = 2;
+const int nENABLE_PIN = 8;
 const int nSLEEP_PIN = 3;
 const int STEP_PIN = 4;
 const int DIR_PIN = 5;
@@ -9,6 +9,7 @@ const bool CW = false;
 const bool CCW = !CW;
 const bool ENABLED = false;
 const bool DISABLED = !ENABLED;
+const int SW = A6;
 
 const bool ASLEEP = false;
 const bool AWAKE = !ASLEEP;
@@ -22,6 +23,7 @@ void setSpeed(int speed){
 
 void setup(){
 
+  pinMode(SW, INPUT); 
   pinMode(STEP_PIN, OUTPUT);
   pinMode(nENABLE_PIN, OUTPUT);
   pinMode(nSLEEP_PIN, OUTPUT);
@@ -30,11 +32,12 @@ void setup(){
   pinMode(M1_PIN, OUTPUT);
 
   // digitalWrite(STEP_PIN, HIGH);
-  // digitalWrite(nSLEEP_PIN, AWAKE);
+  digitalWrite(nSLEEP_PIN, AWAKE);
   digitalWrite(nENABLE_PIN, ENABLED);
   // digitalWrite(nSLEEP_PIN, ASLEEP);
   digitalWrite(M0_PIN, HIGH);
   digitalWrite(M1_PIN, HIGH);
+  digitalWrite(SW, HIGH); 
 
   digitalWrite(DIR_PIN, CW);
 
@@ -50,13 +53,52 @@ const byte SLOW = 8;
 const byte FAST = 3;
 const byte uSTEPS = 32;
 
+const int    B_NONE= 0;
+const int     B_UP = 1;
+const int   B_DOWN = 2;
+const int B_MIDDLE = 3;
+const int   B_LEFT = 4;
+const int  B_RIGHT = 5;
+
+int read_buttons(){
+  int reading = analogRead(SW);
+  int out;
+  if (reading > 900){
+    out = B_UP;
+  }
+  else if (reading > 700){
+    out = B_DOWN;
+  }
+  else if (reading > 500){
+    out = B_MIDDLE;
+  }
+  else if (reading > 300){
+    out = B_LEFT;
+  }
+  else if (reading > 100){
+    out = B_RIGHT;
+  }
+  else{
+    out = B_NONE;
+  }
+  return out;
+}
+
+byte speed = SLOW;
 void loop(){
   // 4 -- 1 usteps
   // 5 -- 16 usteps
   // 6 -- 1  usteps
-  byte speed = SLOW;
+  int b_val = read_buttons();
+  if(b_val == B_UP){
+    speed = FAST;
+    Serial.println("FAST");
+  }
+  else if (b_val == B_DOWN){
+    speed = SLOW;
+    Serial.println("SLOW");
+  }
   setSpeed(speed); // 32 usteps per step?
-  Serial.println(count);
   digitalWrite(nENABLE_PIN, ENABLED);
   if(speed == SLOW){
     for(int i=0; i < uSTEPS; i++){
