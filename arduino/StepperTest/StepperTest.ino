@@ -67,7 +67,7 @@ const int  B_RIGHT = 5;
 void fast(int n_step, bool dir){
   // execute the number of steps the fastest way possible
   int pw_us = 1300;
-  int min_pw = 750;
+  int min_pw = 900;
   int ramp_steps = pw_us - min_pw;
   int i;
 
