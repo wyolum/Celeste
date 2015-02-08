@@ -22,7 +22,7 @@ void setSpeed(int speed){
 }
 
 void setup(){
-
+  
   pinMode(SW, INPUT); 
   pinMode(STEP_PIN, OUTPUT);
   pinMode(nENABLE_PIN, OUTPUT);
@@ -44,11 +44,15 @@ void setup(){
   Serial.begin(115200);
   Serial.println("Booted");
   digitalWrite(nENABLE_PIN, ENABLED);
+  while(1){
+    fast(100 * 60, CW);
+    delay(500);
+  }
 }
 bool dir = CW;
 bool mode = 0;
 int count = 0;
-int pw_ms = 2;
+int pw_us = 1000;
 const byte SLOW = 8;
 const byte FAST = 3;
 const byte uSTEPS = 32;
@@ -59,6 +63,51 @@ const int   B_DOWN = 2;
 const int B_MIDDLE = 3;
 const int   B_LEFT = 4;
 const int  B_RIGHT = 5;
+
+void fast(int n_step, bool dir){
+  // execute the number of steps the fastest way possible
+  int pw_us = 1300;
+  int min_pw = 900;
+  int ramp_steps = pw_us - min_pw;
+  int i;
+
+  if(n_step < 2 * ramp_steps){
+    ramp_steps = n_step / 2;
+  }
+
+  setSpeed(FAST);
+  digitalWrite(DIR_PIN, dir);
+  digitalWrite(nENABLE_PIN, ENABLED);
+  
+  // ramp up
+  for(i = 0; i < ramp_steps; i++){
+    digitalWrite(STEP_PIN, HIGH);
+    delayMicroseconds(pw_us / 2);
+    digitalWrite(STEP_PIN, LOW);
+    delayMicroseconds(pw_us / 2);
+    pw_us--;
+  }
+  
+  // cruse
+  for(i=ramp_steps; i < n_step - ramp_steps; i++){
+    digitalWrite(STEP_PIN, HIGH);
+    delayMicroseconds(pw_us / 2);
+    digitalWrite(STEP_PIN, LOW);
+    delayMicroseconds(pw_us / 2);
+  }
+  // ramp_down
+  for(i = 0; i < ramp_steps; i++){
+    digitalWrite(STEP_PIN, HIGH);
+    delayMicroseconds(pw_us / 2);
+    digitalWrite(STEP_PIN, LOW);
+    delayMicroseconds(pw_us / 2);
+    pw_us++;
+  }
+
+  digitalWrite(nENABLE_PIN, DISABLED);
+  setSpeed(SLOW);
+  digitalWrite(DIR_PIN, CW);
+}
 
 int read_buttons(){
   int reading = analogRead(SW);
@@ -91,31 +140,35 @@ void loop(){
   // 6 -- 1  usteps
   int b_val = read_buttons();
   if(b_val == B_UP){
-    speed = FAST;
-    Serial.println("FAST");
+    fast(200 * 60, CW);
   }
   else if (b_val == B_DOWN){
-    speed = SLOW;
-    Serial.println("SLOW");
+    fast(200 * 60, CCW);
+  }
+  else if (b_val == B_RIGHT){
+    fast(200, CW);
+  }
+  else if (b_val == B_LEFT){
+    fast(200, CCW);
   }
   setSpeed(speed); // 32 usteps per step?
   digitalWrite(nENABLE_PIN, ENABLED);
   if(speed == SLOW){
     for(int i=0; i < uSTEPS; i++){
       digitalWrite(STEP_PIN, HIGH);
-      delay(pw_ms / 2);
+      delayMicroseconds(pw_us / 2);
       digitalWrite(STEP_PIN, LOW);
-      delay(pw_ms / 2);
+      delayMicroseconds(pw_us / 2);
     }
     digitalWrite(nENABLE_PIN, DISABLED); 
-    delay(60000/200. - 32 * pw_ms);
+    delay(60000/200. - 32 * pw_us / 1000.);
   }
   else{
     for(int i=0; i < 200; i++){
       digitalWrite(STEP_PIN, HIGH);
-      delay(pw_ms / 2);
+      delayMicroseconds(pw_us / 2);
       digitalWrite(STEP_PIN, LOW);
-      delay(pw_ms / 2);
+      delayMicroseconds(pw_us / 2);
     }
     digitalWrite(nENABLE_PIN, DISABLED); 
   }

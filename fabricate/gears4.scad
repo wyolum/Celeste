@@ -459,6 +459,7 @@ explode = $t * 40; // 15*mm
 explode = .1 * mm;
 explode = 0;
 /*
+ */
 difference(){                                     // 1 Drive gear
   color([0, 0, 0])
 union(){                   
@@ -480,15 +481,15 @@ translate([59, 0, 0])difference(){
 }
 // 2.2 bearing gear
 // new bearing gear
-translate([0, 0,  1 * acr_thickness]) 
-color([0, 0, 0])translate([59, 0, 0*mm])union(){
+translate([0, 0,  0 * acr_thickness]) 
+color([0, .5, 0])translate([59, 0, 0*mm])union(){
     my_gear(5, screw_d, 2 * gear_thickness - .5*mm);
     translate([0, 0, -7 * mm])cylinder(h=7*mm, r=8.1*mm / 2);
   }
-
 // 3.1 reducing gear (acr)
 // scale(3.54331) //scale for svg file
 translate([0, 0, 1 * explode]) // explode
+translate([0, 0, -acr_thickness]) // explode
 color([1, 1, 0])translate([0, 0, gear_thickness + acr_thickness])difference(){
   my_gear(54, bore_d, acr_thickness);
   translate([0,0,-1])translate([-key_width/2, -key_width/2, 0])cube([key_width, key_width,acr_thickness + 2]);
@@ -496,7 +497,7 @@ color([1, 1, 0])translate([0, 0, gear_thickness + acr_thickness])difference(){
 
 
 translate([0, 0, 3 * explode]) // explode
-translate([-36*mm, 0, 3*gear_thickness])             // 4 Planet gear
+translate([-36*mm, 0, 2*gear_thickness])             // 4 Planet gear
 //rotate(v=[1, 0, 0], a=180)  // (flip for printing)
 color([1, 0, 1])difference(){                      
   my_gear(30, bore_d, gear_thickness);
@@ -505,7 +506,7 @@ color([1, 0, 1])difference(){
 
 
 translate([0, 0, 4 * explode]) // explode // 5 Hour hand
-translate([0, 0, gear_thickness])
+translate([0, 0, 0*gear_thickness])
 color([0, 1, 0])                               
 rotate(v=[0, 1, 0], a=180)hour_hand(gear_thickness, hand_thickness=gear_thickness/3.);
 
@@ -520,14 +521,12 @@ difference(){
 }
 
 translate([0, 0, 6 * explode]) // explode // 7 second hand
-color([1, 0, 0])translate([0, 0, 5 * acr_thickness + .5 * gear_thickness])second_hand(h=gear_thickness/3.);
-*/
+color([1, 0, 0])translate([0, 0, 4 * acr_thickness + .5 * gear_thickness])second_hand(h=gear_thickness/3.);
 
-// translate([0, 0, 5*gear_thickness]) // explode      // 8 Minute hand
+translate([0, 0, -gear_thickness]) // explode      // 8 Minute hand
 translate([0, 0, 5 * explode]) // explode
 translate([0, 0, gear_thickness])
 translate([0, 0, gear_thickness])color([0, 0, 1])rotate(v=[0, 1, 0], a=180)minute_hand(gear_thickness, gear_thickness/3., key_width);
-/*
 
 // Stackup
 /*
