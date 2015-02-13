@@ -33,7 +33,7 @@ module pointer(h){
 		    ],paths=[ [0, 1, 2] ]);
 }
 
-module my_gear(N_TEETH, bore_d, thickness){
+module my_gear(N_TEETH, bore_d, thickness, backlash=1.){ // prototype is backlash = 1.
   PITCH_R = N_TEETH * PITCH / 360.;
   PITCH_D = 2 * PITCH_R;
   PITCH_DIAMETRIAL = N_TEETH / PITCH_D;
@@ -42,7 +42,8 @@ module my_gear(N_TEETH, bore_d, thickness){
   
   //Outer Circle
   OUTER_RADIUS = PITCH_R + ADDENDUM;
-  gear(number_of_teeth=N_TEETH,
+  /*
+    gear(number_of_teeth=N_TEETH,
        circular_pitch = PITCH,
        gear_thickness = thickness,
        rim_thickness = thickness,
@@ -50,7 +51,19 @@ module my_gear(N_TEETH, bore_d, thickness){
        bore_diameter=bore_d,
        circles=0,
        pressure_angle=28,
-       backlash=1 // prototype is backlash = 1.
+       backlash=backlash 
+       );*/
+
+  /// 2X gears have twice the # teeth and half the pitch
+  gear(number_of_teeth=N_TEETH * 2,
+       circular_pitch = PITCH / 2,
+       gear_thickness = thickness,
+       rim_thickness = thickness,
+       hub_thickness = thickness,
+       bore_diameter=bore_d,
+       circles=0,
+       pressure_angle=28,
+       backlash=backlash // TODO: Try 0. 
        );
 }
 
@@ -457,28 +470,35 @@ h=1.5*mm;
 key_width = 8*mm;
 explode = $t * 40; // 15*mm
 explode = .1 * mm;
-explode = 0;
+explode = 10;
 /*
- */
 difference(){                                     // 1 Drive gear
-  color([0, 0, 0])
-union(){                   
-  rotate(a=180/9, v=[0, 0, 1])translate([0, 0, - acr_thickness + 1*mm]){
-    my_gear(9, bore_d, 2 * acr_thickness - 1*mm);
+  color([1, 0, 0])
+    union(){                   
+    rotate(a=180/9, v=[0, 0, 1])translate([0, 0, - acr_thickness + 1*mm]){
+      scale(9.5*mm/9*mm)my_gear(9, bore_d, 2 * acr_thickness +.5*mm, lash=-.2);
+    }
+    translate([2.5*mm - .55*mm, -3*mm, -acr_thickness + 1*mm])cube([2*mm, 6*mm, 2 * acr_thickness + .5*mm]);
   }
-  translate([2.5*mm - .55*mm, -3*mm, -acr_thickness + 1*mm])cube([2*mm, 6*mm, 2 * acr_thickness - 1*mm]);
-}
   translate([0, 0, -3.2*mm])cylinder(r1=bore_d/2 + 1*mm, r2 = 0, h=4*mm);
 }
+ */
+
+
 // 2.1 reducing gear (acrylic) 50,5 with 3d printed inner gear
-//scale(3.54331) //scale for svg file
+scale(3.54331) //scale for svg file
 translate([0, 0,  3* explode]) // explode
 translate([0, 0,  0]) 
 color([0, 1, 1])
 translate([59, 0, 0])difference(){
-  my_gear(50, bore_d, acr_thickness);
-  translate([0,0,-1])scale([1.025, 1.025, 1])my_gear(5, screw_d, acr_thickness + 2);
+  scale(50.5/50)my_gear(50, bore_d, acr_thickness, backlash=-.25);
+  translate([0,0,-1])scale([1.025, 1.025, 1])my_gear(5, screw_d, acr_thickness + 2, backlash=0);
 }
+/*
+*/
+
+/*
+
 // 2.2 bearing gear
 // new bearing gear
 translate([0, 0,  0 * acr_thickness]) 
@@ -486,30 +506,35 @@ color([0, .5, 0])translate([59, 0, 0*mm])union(){
     my_gear(5, screw_d, 2 * gear_thickness - .5*mm);
     translate([0, 0, -7 * mm])cylinder(h=7*mm, r=8.1*mm / 2);
   }
+*/
+
 // 3.1 reducing gear (acr)
-// scale(3.54331) //scale for svg file
+// scale(3.54331) //scale for svg file // 354.331%
+/*
 translate([0, 0, 1 * explode]) // explode
 translate([0, 0, -acr_thickness]) // explode
 color([1, 1, 0])translate([0, 0, gear_thickness + acr_thickness])difference(){
   my_gear(54, bore_d, acr_thickness);
   translate([0,0,-1])translate([-key_width/2, -key_width/2, 0])cube([key_width, key_width,acr_thickness + 2]);
 }
+*/
 
-
+/*
 translate([0, 0, 3 * explode]) // explode
 translate([-36*mm, 0, 2*gear_thickness])             // 4 Planet gear
 //rotate(v=[1, 0, 0], a=180)  // (flip for printing)
-color([1, 0, 1])difference(){                      
-  my_gear(30, bore_d, gear_thickness);
-  translate([0, 0, -0.9*mm])cylinder(r=4.25*mm, h=2*mm);
-}
+color([1, 0, 1]) my_gear(30, 2.82 * mm * 2, gear_thickness);
+*/ 
 
+/*
 
 translate([0, 0, 4 * explode]) // explode // 5 Hour hand
 translate([0, 0, 0*gear_thickness])
 color([0, 1, 0])                               
 rotate(v=[0, 1, 0], a=180)hour_hand(gear_thickness, hand_thickness=gear_thickness/3.);
 
+*/
+/*
 // hour hand snap
 translate([0, 0, 2 * acr_thickness])
 color([0,1,0])translate([-39, 0, 0]) union(){
@@ -519,7 +544,6 @@ difference(){
   translate([0, 0, -1])cylinder(r=2*mm, h=gear_thickness + 2);
 }
 }
-
 translate([0, 0, 6 * explode]) // explode // 7 second hand
 color([1, 0, 0])translate([0, 0, 4 * acr_thickness + .5 * gear_thickness])second_hand(h=gear_thickness/3.);
 
@@ -527,7 +551,15 @@ translate([0, 0, -gear_thickness]) // explode      // 8 Minute hand
 translate([0, 0, 5 * explode]) // explode
 translate([0, 0, gear_thickness])
 translate([0, 0, gear_thickness])color([0, 0, 1])rotate(v=[0, 1, 0], a=180)minute_hand(gear_thickness, gear_thickness/3., key_width);
+*/
 
+/*
+// ring gear
+difference(){
+  cylinder(r=70*mm, h=inch/8);
+  translate([0, 0, -1])my_gear(66, 0, inch/8+2);
+}
+*/
 // Stackup
 /*
 module mount_bores(radius, thickness){

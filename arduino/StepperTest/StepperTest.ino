@@ -44,7 +44,7 @@ void setup(){
   Serial.begin(115200);
   Serial.println("Booted");
   digitalWrite(nENABLE_PIN, ENABLED);
-  while(1){
+  while(0){
     fast(100 * 60, CW);
     delay(500);
   }
@@ -64,10 +64,64 @@ const int B_MIDDLE = 3;
 const int   B_LEFT = 4;
 const int  B_RIGHT = 5;
 
+void linear_accel(int n_step, bool dir){
+  int pw_us = 3000;
+  float pw_ms = pw_us / 1000.;
+  int min_pw = 1000;
+  int ramp_steps = pw_us - min_pw;
+  int completed = 0;
+  int i;
+
+  setSpeed(FAST);
+  digitalWrite(DIR_PIN, dir);
+  digitalWrite(nENABLE_PIN, ENABLED);
+
+  float t_ms = pw_us / 1000.;
+  float k = 130.;
+    
+  // ramp up
+  while((pw_us > min_pw) && (completed < n_step / 2)){
+    pw_us = pw_ms * 1000.;
+    digitalWrite(STEP_PIN, HIGH);
+    delayMicroseconds(pw_us / 2);
+    digitalWrite(STEP_PIN, LOW);
+    delayMicroseconds(pw_us / 2);
+    pw_ms = 2. * k / (t_ms * t_ms);
+
+    Serial.println(pw_us);
+    t_ms += pw_ms;
+    completed++;
+  }
+  ramp_steps = completed;
+
+  // cruse
+  for(i=ramp_steps; i < n_step - ramp_steps; i++){
+    digitalWrite(STEP_PIN, HIGH);
+    delayMicroseconds(pw_us / 2);
+    digitalWrite(STEP_PIN, LOW);
+    delayMicroseconds(pw_us / 2);
+    completed++;
+  }
+  while((t_ms > 0) && (completed)){
+    pw_us = pw_ms * 1000.;
+    digitalWrite(STEP_PIN, HIGH);
+    delayMicroseconds(pw_us / 2);
+    digitalWrite(STEP_PIN, LOW);
+    delayMicroseconds(pw_us / 2);
+    pw_ms = 2. * k / (t_ms * t_ms);
+    t_ms -= pw_ms;
+    completed++;
+  }
+
+  digitalWrite(nENABLE_PIN, DISABLED);
+  setSpeed(SLOW);
+  digitalWrite(DIR_PIN, CW);
+}
+
 void fast(int n_step, bool dir){
   // execute the number of steps the fastest way possible
-  int pw_us = 1300;
-  int min_pw = 900;
+  int pw_us = 1500;
+  int min_pw = 1000;
   int ramp_steps = pw_us - min_pw;
   int i;
 
@@ -161,16 +215,11 @@ void loop(){
       delayMicroseconds(pw_us / 2);
     }
     digitalWrite(nENABLE_PIN, DISABLED); 
-    delay(60000/200. - 32 * pw_us / 1000.);
-  }
-  else{
-    for(int i=0; i < 200; i++){
-      digitalWrite(STEP_PIN, HIGH);
-      delayMicroseconds(pw_us / 2);
-      digitalWrite(STEP_PIN, LOW);
-      delayMicroseconds(pw_us / 2);
+    int d = 60000/200. - (float)uSTEPS * pw_us / 1000.;
+    if(d > 0){
+      delay(d);
     }
-    digitalWrite(nENABLE_PIN, DISABLED); 
+    Serial.println(d);
   }
   return;
 }
