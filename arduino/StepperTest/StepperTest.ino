@@ -1,9 +1,19 @@
 const int nENABLE_PIN = 8;
 const int nSLEEP_PIN = 3;
 const int STEP_PIN = 4;
-const int DIR_PIN = 5;
+
+
+#define ARTHERC
+#ifdef ARTHERC
+const int DIR_PIN = 9; // for ArtherC
+const int M0_PIN = A1;
+const int M1_PIN = A2;
+#else
+const int DIR_PIN = 5; // orig
 const int M0_PIN = 6;
 const int M1_PIN = 7;
+#endif
+
 const int N_STEP = 200;
 const bool CW = false;
 const bool CCW = !CW;
@@ -43,10 +53,11 @@ void setup(){
 
   Serial.begin(115200);
   Serial.println("Booted");
-  digitalWrite(nENABLE_PIN, ENABLED);
-  while(0){
-    fast(100 * 60, CW);
-    delay(500);
+  while(1){
+     fast(100 * 60, CW);
+     delay(100);
+     fast(100 * 60, CCW);
+     delay(100);
   }
 }
 bool dir = CW;
