@@ -1,4 +1,4 @@
-update=Sunday 08 February 2015 05:51:08 PM IST
+update=Sunday 22 February 2015 10:01:50 PM IST
 version=1
 last_client=kicad
 [cvpcb]
@@ -31,11 +31,11 @@ LastNetListRead=i2gps_v1.net
 [pcbnew/libraries]
 LibDir=
 LibName1=i2gps_v1-libs/i2gps_v1
-[general]
-version=1
 [eeschema]
 version=1
 LibDir=
 [eeschema/libraries]
 LibName1=libs/gearclock
 LibName2=libs/power
+[general]
+version=1
