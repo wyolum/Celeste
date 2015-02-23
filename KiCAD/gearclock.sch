@@ -188,7 +188,7 @@ Wire Wire Line
 Wire Wire Line
 	3400 2250 3625 2250
 Wire Wire Line
-	3400 2950 3625 2950
+	4000 2950 3400 2950
 Wire Wire Line
 	3400 4150 3625 4150
 Wire Wire Line
@@ -292,9 +292,7 @@ Wire Wire Line
 Wire Wire Line
 	550  4975 2450 4975
 Wire Wire Line
-	4000 1625 4000 2550
-Wire Wire Line
-	4000 2550 3400 2550
+	4000 1625 4000 2950
 Wire Wire Line
 	4300 2250 4300 1875
 Wire Wire Line
@@ -396,11 +394,11 @@ L CONN_8 P4
 U 1 1 4E241CCB
 P 5325 6400
 F 0 "P4" V 5275 6400 60  0000 C CNN
-F 1 "MOTOR_L" V 5375 6400 60  0000 C CNN
+F 1 "MOTOR_R" V 5375 6400 60  0000 C CNN
 F 2 "ArthurC Lib:PIN_ARRAY-6X1" H 5325 6400 60  0001 C CNN
 F 3 "" H 5325 6400 60  0001 C CNN
 	1    5325 6400
-	1    0    0    -1  
+	1    0    0    1   
 $EndComp
 Text Label 10000 5650 0    40   ~ 0
 GND
@@ -547,14 +545,14 @@ F 3 "" H 3475 7250 60  0001 C CNN
 	0    -1   1    0   
 $EndComp
 $Comp
-L I/O B1
+L I/O A8
 U 1 1 4DCD1D4C
-P 3775 2950
-F 0 "B1" H 3855 2950 40  0000 L CNN
-F 1 "I/O" H 3775 3005 30  0001 C CNN
-F 2 "ArthurC Lib:I%2fO" H 3775 2950 60  0001 C CNN
-F 3 "" H 3775 2950 60  0001 C CNN
-	1    3775 2950
+P 3775 2550
+F 0 "A8" H 3855 2550 40  0000 L CNN
+F 1 "I/O" H 3775 2605 30  0001 C CNN
+F 2 "ArthurC Lib:I%2fO" H 3775 2550 60  0001 C CNN
+F 3 "" H 3775 2550 60  0001 C CNN
+	1    3775 2550
 	1    0    0    -1  
 $EndComp
 Text Label 625  6800 0    40   ~ 0
@@ -624,7 +622,7 @@ Text Label 3625 2350 0    40   ~ 0
 M0
 Text Label 3625 2450 0    40   ~ 0
 M1
-Text Label 3450 2550 0    40   ~ 0
+Text Label 3450 2950 0    40   ~ 0
 Hall
 Text Label 3625 3150 0    40   ~ 0
 RXD
@@ -772,7 +770,7 @@ Wire Wire Line
 Text Label 6050 7025 0    40   ~ 0
 GPS_BAT
 Text Label 6050 6925 0    40   ~ 0
-EN
+GPS_EN
 Text Label 6050 7125 0    40   ~ 0
 FIX
 Text Label 6050 7225 0    40   ~ 0
@@ -926,22 +924,11 @@ Wire Wire Line
 	10925 2400 10925 2350
 Connection ~ 10600 2400
 $Comp
-L I/O LED1
-U 1 1 53809775
-P 3775 3850
-F 0 "LED1" H 3855 3850 40  0000 L CNN
-F 1 "I/O" H 3775 3905 30  0001 C CNN
-F 2 "ArthurC Lib:I%2fO" H 3775 3850 60  0001 C CNN
-F 3 "" H 3775 3850 60  0001 C CNN
-	1    3775 3850
-	1    0    0    -1  
-$EndComp
-$Comp
 L CONN_8 P5
 U 1 1 4E241CD6
 P 5325 7275
 F 0 "P5" V 5275 7275 60  0000 C CNN
-F 1 "MOTOR_R" V 5375 7275 60  0000 C CNN
+F 1 "MOTOR_L" V 5375 7275 60  0000 C CNN
 F 2 "ArthurC Lib:PIN_ARRAY-6X1" H 5325 7275 60  0001 C CNN
 F 3 "" H 5325 7275 60  0001 C CNN
 	1    5325 7275
@@ -1053,9 +1040,8 @@ NoConn ~ 4525 6450
 NoConn ~ 4525 6350
 Text Label 4525 6250 0    40   ~ 0
 3V3
-NoConn ~ 3625 2250
 NoConn ~ 4525 7525
-Text Label 3450 2950 0    40   ~ 0
+Text Label 3450 2550 0    40   ~ 0
 LED1
 $Comp
 L CONN_4 P3
@@ -1092,4 +1078,19 @@ Wire Notes Line
 	6975 6500 6975 5925
 Wire Notes Line
 	8700 5925 8700 6500
+$Comp
+L I/O D7
+U 1 1 53809775
+P 3775 3850
+F 0 "D7" H 3855 3850 40  0000 L CNN
+F 1 "I/O" H 3775 3905 30  0001 C CNN
+F 2 "ArthurC Lib:I%2fO" H 3775 3850 60  0001 C CNN
+F 3 "" H 3775 3850 60  0001 C CNN
+	1    3775 3850
+	1    0    0    -1  
+$EndComp
+Text Label 3625 2250 0    40   ~ 0
+GPS_EN
+Wire Wire Line
+	3400 2550 3625 2550
 $EndSCHEMATC
