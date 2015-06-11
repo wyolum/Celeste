@@ -1,4 +1,4 @@
-update=Wednesday 25 February 2015 12:13:53 AM IST
+update=Thu Jun 11 14:56:42 2015
 version=1
 last_client=kicad
 [cvpcb]
@@ -37,5 +37,6 @@ LibDir=
 [eeschema/libraries]
 LibName1=libs/gearclock
 LibName2=libs/power
+LibName3=/home/anool/projects-git/bebl_v2/kicad/libs/bebl_v2
 [general]
 version=1
