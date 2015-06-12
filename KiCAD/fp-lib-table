@@ -1,3 +1,4 @@
 (fp_lib_table
-  (lib (name "ArthurC Lib")(type Legacy)(uri ${KIPRJMOD}/libs/arthurc.mod)(options "")(descr ""))
+  (lib (name gearclock_fp)(type KiCad)(uri "$(KIPRJMOD)/libs/gearclock_fp.pretty")(options "")(descr ""))
+  (lib (name gearclock)(type Legacy)(uri "$(KIPRJMOD)/libs/gearclock.mod")(options "")(descr ""))
 )

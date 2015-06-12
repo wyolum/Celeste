@@ -1,0 +1,1095 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<export version="D">
+  <design>
+    <source>/home/anool/projects-git/Celeste/KiCAD/gearclock.sch</source>
+    <date>Fri Jun 12 17:16:49 2015</date>
+    <tool>Eeschema 0.201506092252+5726~23~ubuntu14.10.1-product</tool>
+    <sheet number="1" name="/" tstamps="/">
+      <title_block>
+        <title>Gear Clock</title>
+        <company>WyoLum</company>
+        <rev>1</rev>
+        <date>Sunday 08 February 2015</date>
+        <source>gearclock.sch</source>
+        <comment number="1" value=""/>
+        <comment number="2" value=""/>
+        <comment number="3" value=""/>
+        <comment number="4" value=""/>
+      </title_block>
+    </sheet>
+    <sheet number="2" name="/gearclock_rtc/" tstamps="/4E1FEA4E/">
+      <title_block>
+        <title>Gear Clock</title>
+        <company>WyoLum</company>
+        <rev>3</rev>
+        <date>Sunday 08 February 2015</date>
+        <source>gearclock_rtc.sch</source>
+        <comment number="1" value=""/>
+        <comment number="2" value=""/>
+        <comment number="3" value=""/>
+        <comment number="4" value=""/>
+      </title_block>
+    </sheet>
+  </design>
+  <components>
+    <comp ref="C2">
+      <value>22p</value>
+      <footprint>gearclock_fp:c_0805</footprint>
+      <fields>
+        <field name="Digikey">490-1734-1-ND</field>
+      </fields>
+      <libsource lib="gearclock" part="C"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamp>4EC1290E</tstamp>
+    </comp>
+    <comp ref="C1">
+      <value>22p</value>
+      <footprint>gearclock_fp:c_0805</footprint>
+      <fields>
+        <field name="Digikey">490-1734-1-ND</field>
+      </fields>
+      <libsource lib="gearclock" part="C"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamp>4EC128EB</tstamp>
+    </comp>
+    <comp ref="C6">
+      <value>1u</value>
+      <footprint>gearclock_fp:c_0805</footprint>
+      <libsource lib="gearclock" part="C"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamp>4E1ECFB8</tstamp>
+    </comp>
+    <comp ref="R4">
+      <value>750E</value>
+      <footprint>gearclock_fp:r_0805</footprint>
+      <libsource lib="gearclock" part="R"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamp>4DCFFAF9</tstamp>
+    </comp>
+    <comp ref="C4">
+      <value>100n</value>
+      <footprint>gearclock_fp:c_0805</footprint>
+      <libsource lib="gearclock" part="C"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamp>4DCB9774</tstamp>
+    </comp>
+    <comp ref="U3">
+      <value>3V3</value>
+      <footprint>gearclock_fp:SOT23-3</footprint>
+      <fields>
+        <field name="Part No">MCP1700T-3302E/TT</field>
+      </fields>
+      <libsource lib="gearclock" part="MCP_1700"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamp>4DCAC2D1</tstamp>
+    </comp>
+    <comp ref="R2">
+      <value>10k</value>
+      <footprint>gearclock_fp:r_0805</footprint>
+      <libsource lib="gearclock" part="R"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamp>4DCAC172</tstamp>
+    </comp>
+    <comp ref="R3">
+      <value>10k</value>
+      <footprint>gearclock_fp:r_0805</footprint>
+      <libsource lib="gearclock" part="R"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamp>4DCAC161</tstamp>
+    </comp>
+    <comp ref="SW1">
+      <value>RST</value>
+      <footprint>gearclock_fp:Switch_SMT</footprint>
+      <fields/>
+      <libsource lib="gearclock" part="SW_PUSH"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamp>4DCA7D67</tstamp>
+    </comp>
+    <comp ref="R1">
+      <value>10k</value>
+      <footprint>gearclock_fp:r_0805</footprint>
+      <libsource lib="gearclock" part="R"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamp>4DCA7BFC</tstamp>
+    </comp>
+    <comp ref="C3">
+      <value>100n</value>
+      <footprint>gearclock_fp:c_0805</footprint>
+      <libsource lib="gearclock" part="C"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamp>4DCA7BAC</tstamp>
+    </comp>
+    <comp ref="C7">
+      <value>1u</value>
+      <footprint>gearclock_fp:c_0805</footprint>
+      <libsource lib="gearclock" part="C"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamp>4DCA5F1E</tstamp>
+    </comp>
+    <comp ref="X1">
+      <value>8MHz</value>
+      <footprint>gearclock_fp:Xtal_SMD4</footprint>
+      <libsource lib="gearclock" part="CRYSTAL"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamp>5313C3B2</tstamp>
+    </comp>
+    <comp ref="P8">
+      <value>IO</value>
+      <footprint>gearclock_fp:IO</footprint>
+      <libsource lib="gearclock" part="IO"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamp>5339A614</tstamp>
+    </comp>
+    <comp ref="P9">
+      <value>IO</value>
+      <footprint>gearclock_fp:IO</footprint>
+      <libsource lib="gearclock" part="IO"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamp>5339B720</tstamp>
+    </comp>
+    <comp ref="P10">
+      <value>IO</value>
+      <footprint>gearclock_fp:IO</footprint>
+      <libsource lib="gearclock" part="IO"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamp>5339B72B</tstamp>
+    </comp>
+    <comp ref="SD1">
+      <value>SD_CARD_Micro</value>
+      <footprint>gearclock_fp:SD_Micro</footprint>
+      <libsource lib="gearclock" part="SD_CARD_Micro"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamp>535D43B5</tstamp>
+    </comp>
+    <comp ref="C8">
+      <value>47uF_25V</value>
+      <footprint>gearclock_fp:C_ELCO_SMD</footprint>
+      <libsource lib="gearclock" part="C_POL"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamp>536B66B9</tstamp>
+    </comp>
+    <comp ref="U2">
+      <value>Hall_Sensor</value>
+      <footprint>gearclock_fp:SOT23-3</footprint>
+      <libsource lib="gearclock" part="Hall_Sensor"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamp>54D79F22</tstamp>
+    </comp>
+    <comp ref="U1">
+      <value>ATMEGA328P</value>
+      <footprint>gearclock_fp:TQFP32</footprint>
+      <libsource lib="gearclock" part="ATMEGA328-TQFP32"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamp>4DCA5EC5</tstamp>
+    </comp>
+    <comp ref="C5">
+      <value>100n</value>
+      <footprint>gearclock_fp:c_0805</footprint>
+      <fields>
+        <field name="Field4">CAP CER 0.1UF 25V 10% X7R 0805</field>
+        <field name="Field5">100nF, 25V</field>
+        <field name="Field6">Surface Mount, MLCC</field>
+        <field name="Field7">Kemet</field>
+        <field name="Field8">C0805C104K3RACTU</field>
+        <field name="Field9">Digikey</field>
+        <field name="Field10">399-1168-1-ND</field>
+        <field name="Field11">http://www.digikey.com/product-detail/en/C0805C104K3RACTU/399-1168-1-ND/411443</field>
+      </fields>
+      <libsource lib="gearclock" part="C"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamp>54ECC15D</tstamp>
+    </comp>
+    <comp ref="LED1">
+      <value>WS2812B</value>
+      <footprint>gearclock_fp:RGB_WS2811B</footprint>
+      <libsource lib="gearclock" part="WS2812B"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamp>54ECC16E</tstamp>
+    </comp>
+    <comp ref="B1">
+      <value>IO</value>
+      <footprint>gearclock_fp:IO</footprint>
+      <libsource lib="gearclock" part="IO"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamp>54ED61D2</tstamp>
+    </comp>
+    <comp ref="C10">
+      <value>100n</value>
+      <footprint>gearclock_fp:c_0805</footprint>
+      <fields>
+        <field name="Field4">CAP CER 0.1UF 25V 10% X7R 0805</field>
+        <field name="Field5">100nF, 25V</field>
+        <field name="Field6">Surface Mount, MLCC</field>
+        <field name="Field7">Kemet</field>
+        <field name="Field8">C0805C104K3RACTU</field>
+        <field name="Field9">Digikey</field>
+        <field name="Field10">399-1168-1-ND</field>
+        <field name="Field11">http://www.digikey.com/product-detail/en/C0805C104K3RACTU/399-1168-1-ND/411443</field>
+      </fields>
+      <libsource lib="gearclock" part="C"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamp>5576F5A0</tstamp>
+    </comp>
+    <comp ref="P1">
+      <value>ISP</value>
+      <footprint>gearclock_fp:Header_ISP</footprint>
+      <libsource lib="gearclock" part="CONN_02X03"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamp>55799A6C</tstamp>
+    </comp>
+    <comp ref="P2">
+      <value>FTDI</value>
+      <footprint>gearclock_fp:Header_FTDI</footprint>
+      <libsource lib="gearclock" part="CONN_01X06"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamp>5579A6CC</tstamp>
+    </comp>
+    <comp ref="P7">
+      <value>Motor_L</value>
+      <footprint>gearclock_fp:Pin_Header_Straight_1x08</footprint>
+      <libsource lib="gearclock" part="CONN_01X08"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamp>5579B95F</tstamp>
+    </comp>
+    <comp ref="P6">
+      <value>Motor_R</value>
+      <footprint>gearclock_fp:Pin_Header_Straight_1x08</footprint>
+      <libsource lib="gearclock" part="CONN_01X08"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamp>5579C21C</tstamp>
+    </comp>
+    <comp ref="P11">
+      <value>GPS</value>
+      <footprint>gearclock_fp:Pin_Header_Straight_1x09</footprint>
+      <libsource lib="gearclock" part="CONN_01X09"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamp>5579C716</tstamp>
+    </comp>
+    <comp ref="P5">
+      <value>Motor</value>
+      <footprint>gearclock_fp:Pin_Header_Straight_1x04</footprint>
+      <libsource lib="gearclock" part="CONN_01X04"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamp>5579DC3C</tstamp>
+    </comp>
+    <comp ref="P12">
+      <value>3V3_In</value>
+      <footprint>gearclock_fp:Pin_Header_Straight_1x02</footprint>
+      <libsource lib="gearclock" part="CONN_01X02"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamp>5579E42D</tstamp>
+    </comp>
+    <comp ref="P13">
+      <value>WallW</value>
+      <footprint>gearclock_fp:BARREL_JACK</footprint>
+      <libsource lib="gearclock" part="CONN_01X02"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamp>5579E9AA</tstamp>
+    </comp>
+    <comp ref="P3">
+      <value>SW_EXT</value>
+      <footprint>gearclock_fp:Pin_Header_Straight_1x03</footprint>
+      <libsource lib="gearclock" part="CONN_01X03"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamp>557A14E9</tstamp>
+    </comp>
+    <comp ref="U5">
+      <value>ADXL345</value>
+      <footprint>gearclock_fp:ADXL345</footprint>
+      <libsource lib="bebl_v2" part="ADXL345"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamp>557974EF</tstamp>
+    </comp>
+    <comp ref="C12">
+      <value>100nF</value>
+      <footprint>gearclock_fp:c_0805</footprint>
+      <fields>
+        <field name="Field4">CAP FILM 0.1UF 63VDC RADIAL</field>
+        <field name="Field5">100nF, 63V</field>
+        <field name="Field6">R82</field>
+        <field name="Field7">Kemet</field>
+        <field name="Field8">R82DC3100AA50J</field>
+        <field name="Field9">Digikey</field>
+        <field name="Field10">399-5863-ND</field>
+        <field name="Field11">http://www.digikey.com/product-detail/en/R82DC3100AA50J/399-5863-ND/2571298?cur=USD</field>
+      </fields>
+      <libsource lib="bebl_v2" part="C_NPOL"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamp>55797511</tstamp>
+    </comp>
+    <comp ref="C13">
+      <value>100nF</value>
+      <footprint>gearclock_fp:c_0805</footprint>
+      <fields>
+        <field name="Field4">CAP FILM 0.1UF 63VDC RADIAL</field>
+        <field name="Field5">100nF, 63V</field>
+        <field name="Field6">R82</field>
+        <field name="Field7">Kemet</field>
+        <field name="Field8">R82DC3100AA50J</field>
+        <field name="Field9">Digikey</field>
+        <field name="Field10">399-5863-ND</field>
+        <field name="Field11">http://www.digikey.com/product-detail/en/R82DC3100AA50J/399-5863-ND/2571298?cur=USD</field>
+      </fields>
+      <libsource lib="bebl_v2" part="C_NPOL"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamp>55797520</tstamp>
+    </comp>
+    <comp ref="C11">
+      <value>10uF</value>
+      <footprint>gearclock_fp:C_ELCO_SMD</footprint>
+      <fields>
+        <field name="Field4">CAP ALUM 100UF 16V 20% RADIAL</field>
+        <field name="Field5">100u,16V</field>
+        <field name="Field6">Radial, Can, 6.3mm dia</field>
+        <field name="Field7">Panasonic Electronic Components</field>
+        <field name="Field8">ECE-A1CKA101</field>
+        <field name="Field9">Digikey</field>
+        <field name="Field10">P833-ND</field>
+        <field name="Field11">http://www.digikey.com/product-detail/en/ECE-A1CKA101/P833-ND/44757?cur=USD</field>
+      </fields>
+      <libsource lib="gearclock" part="C_POL"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamp>5579752F</tstamp>
+    </comp>
+    <comp ref="R10">
+      <value>10k</value>
+      <footprint>gearclock_fp:r_0805</footprint>
+      <libsource lib="gearclock" part="R"/>
+      <sheetpath names="/gearclock_rtc/" tstamps="/4E1FEA4E/"/>
+      <tstamp>4ECB8D22</tstamp>
+    </comp>
+    <comp ref="B4">
+      <value>IO</value>
+      <footprint>gearclock_fp:IO</footprint>
+      <libsource lib="gearclock" part="IO"/>
+      <sheetpath names="/gearclock_rtc/" tstamps="/4E1FEA4E/"/>
+      <tstamp>4E1FEBD4</tstamp>
+    </comp>
+    <comp ref="B3">
+      <value>IO</value>
+      <footprint>gearclock_fp:IO</footprint>
+      <libsource lib="gearclock" part="IO"/>
+      <sheetpath names="/gearclock_rtc/" tstamps="/4E1FEA4E/"/>
+      <tstamp>4E1FEBCE</tstamp>
+    </comp>
+    <comp ref="B2">
+      <value>IO</value>
+      <footprint>gearclock_fp:IO</footprint>
+      <libsource lib="gearclock" part="IO"/>
+      <sheetpath names="/gearclock_rtc/" tstamps="/4E1FEA4E/"/>
+      <tstamp>4E1FEBC6</tstamp>
+    </comp>
+    <comp ref="U4">
+      <value>DS3231N</value>
+      <footprint>gearclock_fp:DS3231</footprint>
+      <libsource lib="gearclock" part="DS3231N"/>
+      <sheetpath names="/gearclock_rtc/" tstamps="/4E1FEA4E/"/>
+      <tstamp>4E1FEA7F</tstamp>
+    </comp>
+    <comp ref="C9">
+      <value>100n</value>
+      <footprint>gearclock_fp:c_0805</footprint>
+      <libsource lib="gearclock" part="C"/>
+      <sheetpath names="/gearclock_rtc/" tstamps="/4E1FEA4E/"/>
+      <tstamp>4E1FEA7E</tstamp>
+    </comp>
+    <comp ref="BT1">
+      <value>Batt_RTC</value>
+      <footprint>gearclock_fp:CR2032</footprint>
+      <fields>
+        <field name="Digikey">BU2032SM-HD-GCT-ND </field>
+      </fields>
+      <libsource lib="gearclock" part="Batt_RTC"/>
+      <sheetpath names="/gearclock_rtc/" tstamps="/4E1FEA4E/"/>
+      <tstamp>535D65B7</tstamp>
+    </comp>
+  </components>
+  <libparts>
+    <libpart lib="gearclock" part="ATMEGA328-TQFP32">
+      <footprints>
+        <fp>TQFP32</fp>
+      </footprints>
+      <fields>
+        <field name="Reference">IC</field>
+        <field name="Value">ATMEGA328-TQFP32</field>
+        <field name="Footprint">TQFP32</field>
+      </fields>
+      <pins>
+        <pin num="1" name="PD3(INT1)" type="BiDi"/>
+        <pin num="2" name="PD4(XCK/T0)" type="BiDi"/>
+        <pin num="3" name="GND" type="passive"/>
+        <pin num="4" name="VCC" type="power_in"/>
+        <pin num="5" name="GND" type="passive"/>
+        <pin num="6" name="VCC" type="power_in"/>
+        <pin num="7" name="PB6(XTAL1/TOSC1)" type="BiDi"/>
+        <pin num="8" name="PB7(XTAL2/TOSC2)" type="BiDi"/>
+        <pin num="9" name="PD5(T1)" type="BiDi"/>
+        <pin num="10" name="PD6(AIN0)" type="BiDi"/>
+        <pin num="11" name="PD7(AIN1)" type="BiDi"/>
+        <pin num="12" name="PB0(ICP)" type="BiDi"/>
+        <pin num="13" name="PB1(OC1A)" type="BiDi"/>
+        <pin num="14" name="PB2(SS/OC1B)" type="BiDi"/>
+        <pin num="15" name="PB3(MOSI/OC2)" type="BiDi"/>
+        <pin num="16" name="PB4(MISO)" type="BiDi"/>
+        <pin num="17" name="PB5(SCK)" type="BiDi"/>
+        <pin num="18" name="AVCC" type="passive"/>
+        <pin num="19" name="ADC6" type="BiDi"/>
+        <pin num="20" name="AREF" type="passive"/>
+        <pin num="21" name="AGND" type="passive"/>
+        <pin num="22" name="ADC7" type="BiDi"/>
+        <pin num="23" name="PC0(ADC0)" type="BiDi"/>
+        <pin num="24" name="PC1(ADC1)" type="BiDi"/>
+        <pin num="25" name="PC2(ADC2)" type="BiDi"/>
+        <pin num="26" name="PC3(ADC3)" type="BiDi"/>
+        <pin num="27" name="PC4(ADC4/SDA)" type="BiDi"/>
+        <pin num="28" name="PC5(ADC5/SCL)" type="BiDi"/>
+        <pin num="29" name="PC6(/RESET)" type="BiDi"/>
+        <pin num="30" name="PD0(RXD)" type="BiDi"/>
+        <pin num="31" name="PD1(TXD)" type="BiDi"/>
+        <pin num="32" name="PD2(INT0)" type="BiDi"/>
+      </pins>
+    </libpart>
+    <libpart lib="gearclock" part="Batt_RTC">
+      <fields>
+        <field name="Reference">BT</field>
+        <field name="Value">Batt_RTC</field>
+        <field name="Digikey">BU2032SM-HD-GCT-ND </field>
+      </fields>
+      <pins>
+        <pin num="+" name="+" type="passive"/>
+        <pin num="-" name="-" type="passive"/>
+      </pins>
+    </libpart>
+    <libpart lib="gearclock" part="C">
+      <footprints>
+        <fp>SM*</fp>
+        <fp>C?</fp>
+        <fp>C1-1</fp>
+      </footprints>
+      <fields>
+        <field name="Reference">C</field>
+        <field name="Value">C</field>
+        <field name="Digikey">490-1734-1-ND</field>
+      </fields>
+      <pins>
+        <pin num="1" name="~" type="passive"/>
+        <pin num="2" name="~" type="passive"/>
+      </pins>
+    </libpart>
+    <libpart lib="gearclock" part="CONN_01X02">
+      <footprints>
+        <fp>Pin_Header_Straight_1X02</fp>
+        <fp>Pin_Header_Angled_1X02</fp>
+        <fp>Socket_Strip_Straight_1X02</fp>
+        <fp>Socket_Strip_Angled_1X02</fp>
+      </footprints>
+      <fields>
+        <field name="Reference">P</field>
+        <field name="Value">CONN_01X02</field>
+      </fields>
+      <pins>
+        <pin num="1" name="P1" type="passive"/>
+        <pin num="2" name="P2" type="passive"/>
+      </pins>
+    </libpart>
+    <libpart lib="gearclock" part="CONN_01X03">
+      <footprints>
+        <fp>Pin_Header_Straight_1X03</fp>
+        <fp>Pin_Header_Angled_1X03</fp>
+        <fp>Socket_Strip_Straight_1X03</fp>
+        <fp>Socket_Strip_Angled_1X03</fp>
+      </footprints>
+      <fields>
+        <field name="Reference">P</field>
+        <field name="Value">CONN_01X03</field>
+      </fields>
+      <pins>
+        <pin num="1" name="P1" type="passive"/>
+        <pin num="2" name="P2" type="passive"/>
+        <pin num="3" name="P3" type="passive"/>
+      </pins>
+    </libpart>
+    <libpart lib="gearclock" part="CONN_01X04">
+      <footprints>
+        <fp>Pin_Header_Straight_1X04</fp>
+        <fp>Pin_Header_Angled_1X04</fp>
+        <fp>Socket_Strip_Straight_1X04</fp>
+        <fp>Socket_Strip_Angled_1X04</fp>
+      </footprints>
+      <fields>
+        <field name="Reference">P</field>
+        <field name="Value">CONN_01X04</field>
+      </fields>
+      <pins>
+        <pin num="1" name="P1" type="passive"/>
+        <pin num="2" name="P2" type="passive"/>
+        <pin num="3" name="P3" type="passive"/>
+        <pin num="4" name="P4" type="passive"/>
+      </pins>
+    </libpart>
+    <libpart lib="gearclock" part="CONN_01X06">
+      <footprints>
+        <fp>Pin_Header_Straight_1X06</fp>
+        <fp>Pin_Header_Angled_1X06</fp>
+        <fp>Socket_Strip_Straight_1X06</fp>
+        <fp>Socket_Strip_Angled_1X06</fp>
+      </footprints>
+      <fields>
+        <field name="Reference">P</field>
+        <field name="Value">CONN_01X06</field>
+      </fields>
+      <pins>
+        <pin num="1" name="P1" type="passive"/>
+        <pin num="2" name="P2" type="passive"/>
+        <pin num="3" name="P3" type="passive"/>
+        <pin num="4" name="P4" type="passive"/>
+        <pin num="5" name="P5" type="passive"/>
+        <pin num="6" name="P6" type="passive"/>
+      </pins>
+    </libpart>
+    <libpart lib="gearclock" part="CONN_01X08">
+      <footprints>
+        <fp>Pin_Header_Straight_1X08</fp>
+        <fp>Pin_Header_Angled_1X08</fp>
+        <fp>Socket_Strip_Straight_1X08</fp>
+        <fp>Socket_Strip_Angled_1X08</fp>
+      </footprints>
+      <fields>
+        <field name="Reference">P</field>
+        <field name="Value">CONN_01X08</field>
+      </fields>
+      <pins>
+        <pin num="1" name="P1" type="passive"/>
+        <pin num="2" name="P2" type="passive"/>
+        <pin num="3" name="P3" type="passive"/>
+        <pin num="4" name="P4" type="passive"/>
+        <pin num="5" name="P5" type="passive"/>
+        <pin num="6" name="P6" type="passive"/>
+        <pin num="7" name="P7" type="passive"/>
+        <pin num="8" name="P8" type="passive"/>
+      </pins>
+    </libpart>
+    <libpart lib="gearclock" part="CONN_01X09">
+      <footprints>
+        <fp>Pin_Header_Straight_1X09</fp>
+        <fp>Pin_Header_Angled_1X09</fp>
+        <fp>Socket_Strip_Straight_1X09</fp>
+        <fp>Socket_Strip_Angled_1X09</fp>
+      </footprints>
+      <fields>
+        <field name="Reference">P</field>
+        <field name="Value">CONN_01X09</field>
+      </fields>
+      <pins>
+        <pin num="1" name="P1" type="passive"/>
+        <pin num="2" name="P2" type="passive"/>
+        <pin num="3" name="P3" type="passive"/>
+        <pin num="4" name="P4" type="passive"/>
+        <pin num="5" name="P5" type="passive"/>
+        <pin num="6" name="P6" type="passive"/>
+        <pin num="7" name="P7" type="passive"/>
+        <pin num="8" name="P8" type="passive"/>
+        <pin num="9" name="P9" type="passive"/>
+      </pins>
+    </libpart>
+    <libpart lib="gearclock" part="CONN_02X03">
+      <footprints>
+        <fp>Pin_Header_Straight_2X03</fp>
+        <fp>Pin_Header_Angled_2X03</fp>
+        <fp>Socket_Strip_Straight_2X03</fp>
+        <fp>Socket_Strip_Angled_2X03</fp>
+      </footprints>
+      <fields>
+        <field name="Reference">P</field>
+        <field name="Value">CONN_02X03</field>
+      </fields>
+      <pins>
+        <pin num="1" name="P1" type="passive"/>
+        <pin num="2" name="P2" type="passive"/>
+        <pin num="3" name="P3" type="passive"/>
+        <pin num="4" name="P4" type="passive"/>
+        <pin num="5" name="P5" type="passive"/>
+        <pin num="6" name="P6" type="passive"/>
+      </pins>
+    </libpart>
+    <libpart lib="gearclock" part="CRYSTAL">
+      <fields>
+        <field name="Reference">X</field>
+        <field name="Value">CRYSTAL</field>
+      </fields>
+      <pins>
+        <pin num="1" name="1" type="passive"/>
+        <pin num="2" name="2" type="passive"/>
+        <pin num="3" name="3" type="passive"/>
+      </pins>
+    </libpart>
+    <libpart lib="gearclock" part="C_POL">
+      <footprints>
+        <fp>SM*</fp>
+        <fp>C?</fp>
+        <fp>C1-1</fp>
+      </footprints>
+      <fields>
+        <field name="Reference">C</field>
+        <field name="Value">C_POL</field>
+      </fields>
+      <pins>
+        <pin num="1" name="~" type="passive"/>
+        <pin num="2" name="~" type="passive"/>
+      </pins>
+    </libpart>
+    <libpart lib="gearclock" part="DS3231N">
+      <fields>
+        <field name="Reference">U</field>
+        <field name="Value">DS3231N</field>
+      </fields>
+      <pins>
+        <pin num="1" name="32KHz" type="output"/>
+        <pin num="2" name="Vcc" type="power_in"/>
+        <pin num="3" name="!(INT)/SQR" type="output"/>
+        <pin num="4" name="!(Reset)" type="BiDi"/>
+        <pin num="5" name="NC" type="passive"/>
+        <pin num="6" name="NC" type="passive"/>
+        <pin num="7" name="NC" type="passive"/>
+        <pin num="8" name="NC" type="passive"/>
+        <pin num="9" name="NC" type="passive"/>
+        <pin num="10" name="NC" type="passive"/>
+        <pin num="11" name="NC" type="passive"/>
+        <pin num="12" name="NC" type="passive"/>
+        <pin num="13" name="GND" type="power_in"/>
+        <pin num="14" name="Vbat" type="power_in"/>
+        <pin num="15" name="SDA" type="BiDi"/>
+        <pin num="16" name="SCL" type="input"/>
+      </pins>
+    </libpart>
+    <libpart lib="gearclock" part="Hall_Sensor">
+      <fields>
+        <field name="Reference">U</field>
+        <field name="Value">Hall_Sensor</field>
+      </fields>
+      <pins>
+        <pin num="1" name="+" type="passive"/>
+        <pin num="2" name="Out" type="passive"/>
+        <pin num="3" name="-" type="passive"/>
+      </pins>
+    </libpart>
+    <libpart lib="gearclock" part="MCP_1700">
+      <fields>
+        <field name="Reference">U</field>
+        <field name="Value">MCP_1700</field>
+      </fields>
+      <pins>
+        <pin num="1" name="GND" type="passive"/>
+        <pin num="2" name="VOUT" type="output"/>
+        <pin num="3" name="VIN" type="input"/>
+      </pins>
+    </libpart>
+    <libpart lib="gearclock" part="R">
+      <footprints>
+        <fp>R?</fp>
+        <fp>SM0603</fp>
+        <fp>SM0805</fp>
+      </footprints>
+      <fields>
+        <field name="Reference">R</field>
+        <field name="Value">R</field>
+      </fields>
+      <pins>
+        <pin num="1" name="~" type="passive"/>
+        <pin num="2" name="~" type="passive"/>
+      </pins>
+    </libpart>
+    <libpart lib="gearclock" part="SD_CARD_Micro">
+      <fields>
+        <field name="Reference">SD</field>
+        <field name="Value">SD_CARD_Micro</field>
+      </fields>
+      <pins>
+        <pin num="1" name="DAT2" type="passive"/>
+        <pin num="2" name="CS/DAT3" type="passive"/>
+        <pin num="3" name="DI/CMD" type="passive"/>
+        <pin num="4" name="VCC" type="passive"/>
+        <pin num="5" name="CLK" type="passive"/>
+        <pin num="6" name="GND" type="passive"/>
+        <pin num="7" name="DO/DAT0" type="passive"/>
+        <pin num="8" name="DAT1" type="passive"/>
+        <pin num="9" name="CDN" type="input"/>
+        <pin num="G1" name="~" type="passive"/>
+        <pin num="G2" name="~" type="passive"/>
+        <pin num="G3" name="~" type="passive"/>
+        <pin num="G4" name="~" type="passive"/>
+        <pin num="H1" name="~" type="passive"/>
+        <pin num="H2" name="~" type="passive"/>
+      </pins>
+    </libpart>
+    <libpart lib="gearclock" part="SW_PUSH">
+      <fields>
+        <field name="Reference">SW</field>
+        <field name="Value">SW_PUSH</field>
+      </fields>
+      <pins>
+        <pin num="1" name="1" type="passive"/>
+        <pin num="2" name="2" type="passive"/>
+      </pins>
+    </libpart>
+    <libpart lib="gearclock" part="WS2812B">
+      <fields>
+        <field name="Reference">LED</field>
+        <field name="Value">WS2812B</field>
+      </fields>
+      <pins>
+        <pin num="1" name="VDD" type="power_in"/>
+        <pin num="2" name="DO" type="output"/>
+        <pin num="3" name="VSS" type="power_in"/>
+        <pin num="4" name="DI" type="input"/>
+      </pins>
+    </libpart>
+    <libpart lib="bebl_v2" part="ADXL345">
+      <fields>
+        <field name="Reference">U</field>
+        <field name="Value">ADXL345</field>
+      </fields>
+      <pins>
+        <pin num="1" name="VDD" type="power_in"/>
+        <pin num="2" name="GND" type="passive"/>
+        <pin num="3" name="NC" type="passive"/>
+        <pin num="4" name="GND1" type="passive"/>
+        <pin num="5" name="GND2" type="passive"/>
+        <pin num="6" name="VSS" type="power_in"/>
+        <pin num="7" name="CS" type="passive"/>
+        <pin num="8" name="INT1" type="passive"/>
+        <pin num="9" name="INT2" type="passive"/>
+        <pin num="10" name="NC" type="passive"/>
+        <pin num="11" name="NC" type="passive"/>
+        <pin num="12" name="SDO" type="passive"/>
+        <pin num="13" name="SDA" type="passive"/>
+        <pin num="14" name="SCL" type="passive"/>
+      </pins>
+    </libpart>
+    <libpart lib="bebl_v2" part="C_NPOL">
+      <footprints>
+        <fp>SM*</fp>
+        <fp>C?</fp>
+        <fp>C1-1</fp>
+      </footprints>
+      <fields>
+        <field name="Reference">C</field>
+        <field name="Value">C_NPOL</field>
+      </fields>
+      <pins>
+        <pin num="1" name="~" type="passive"/>
+        <pin num="2" name="~" type="passive"/>
+      </pins>
+    </libpart>
+    <libpart lib="gearclock" part="IO">
+      <fields>
+        <field name="Reference">B</field>
+        <field name="Value">IO</field>
+      </fields>
+      <pins>
+        <pin num="1" name="1" type="passive"/>
+      </pins>
+    </libpart>
+  </libparts>
+  <libraries>
+    <library logical="gearclock">
+      <uri>/home/anool/projects-git/Celeste/KiCAD/libs/gearclock.lib</uri>
+    </library>
+    <library logical="bebl_v2">
+      <uri>/home/anool/projects-git/bebl_v2/kicad/libs/bebl_v2.lib</uri>
+    </library>
+  </libraries>
+  <nets>
+    <net code="1" name="Net-(B1-Pad1)">
+      <node ref="LED1" pin="2"/>
+      <node ref="B1" pin="1"/>
+    </net>
+    <net code="2" name="/FLT">
+      <node ref="P7" pin="7"/>
+    </net>
+    <net code="3" name="+3.3V">
+      <node ref="U1" pin="4"/>
+      <node ref="P11" pin="8"/>
+      <node ref="P12" pin="1"/>
+      <node ref="U1" pin="6"/>
+      <node ref="P6" pin="6"/>
+      <node ref="P3" pin="1"/>
+      <node ref="U5" pin="7"/>
+      <node ref="R10" pin="1"/>
+      <node ref="U4" pin="2"/>
+      <node ref="C11" pin="1"/>
+      <node ref="U5" pin="6"/>
+      <node ref="C12" pin="1"/>
+      <node ref="C13" pin="1"/>
+      <node ref="P2" pin="3"/>
+      <node ref="P1" pin="2"/>
+      <node ref="C10" pin="1"/>
+      <node ref="U5" pin="1"/>
+      <node ref="U2" pin="1"/>
+      <node ref="U1" pin="20"/>
+      <node ref="C3" pin="1"/>
+      <node ref="R1" pin="1"/>
+      <node ref="R3" pin="1"/>
+      <node ref="R2" pin="1"/>
+      <node ref="C6" pin="1"/>
+      <node ref="U3" pin="2"/>
+      <node ref="SD1" pin="4"/>
+      <node ref="U1" pin="18"/>
+    </net>
+    <net code="4" name="/VREF">
+      <node ref="P6" pin="5"/>
+    </net>
+    <net code="5" name="/CFG">
+      <node ref="P6" pin="4"/>
+    </net>
+    <net code="6" name="/GPS_EN">
+      <node ref="P11" pin="2"/>
+      <node ref="P9" pin="1"/>
+      <node ref="U1" pin="23"/>
+    </net>
+    <net code="7" name="/TXD">
+      <node ref="U1" pin="31"/>
+      <node ref="P2" pin="5"/>
+    </net>
+    <net code="8" name="/RXD">
+      <node ref="U1" pin="30"/>
+      <node ref="P2" pin="4"/>
+    </net>
+    <net code="9" name="/SW">
+      <node ref="P3" pin="2"/>
+      <node ref="U1" pin="26"/>
+    </net>
+    <net code="10" name="Net-(LED1-Pad4)">
+      <node ref="R4" pin="1"/>
+      <node ref="LED1" pin="4"/>
+    </net>
+    <net code="11" name="/5V">
+      <node ref="P7" pin="1"/>
+      <node ref="U3" pin="3"/>
+      <node ref="C7" pin="1"/>
+      <node ref="P13" pin="2"/>
+      <node ref="LED1" pin="3"/>
+      <node ref="C5" pin="1"/>
+      <node ref="C8" pin="1"/>
+    </net>
+    <net code="12" name="/B2">
+      <node ref="P7" pin="3"/>
+      <node ref="P5" pin="1"/>
+    </net>
+    <net code="13" name="/B1">
+      <node ref="P7" pin="4"/>
+      <node ref="P5" pin="2"/>
+    </net>
+    <net code="14" name="/M1">
+      <node ref="U1" pin="25"/>
+      <node ref="P6" pin="3"/>
+    </net>
+    <net code="15" name="/M0">
+      <node ref="P6" pin="2"/>
+      <node ref="U1" pin="24"/>
+    </net>
+    <net code="16" name="/EN">
+      <node ref="U1" pin="12"/>
+      <node ref="P6" pin="1"/>
+    </net>
+    <net code="17" name="/DIR">
+      <node ref="U1" pin="13"/>
+      <node ref="P6" pin="8"/>
+    </net>
+    <net code="18" name="/STP">
+      <node ref="P6" pin="7"/>
+      <node ref="U1" pin="2"/>
+    </net>
+    <net code="19" name="/A2">
+      <node ref="P7" pin="6"/>
+      <node ref="P5" pin="4"/>
+    </net>
+    <net code="20" name="/GPS_Rx">
+      <node ref="P11" pin="6"/>
+      <node ref="U1" pin="9"/>
+    </net>
+    <net code="21" name="/PB7">
+      <node ref="X1" pin="2"/>
+      <node ref="U1" pin="8"/>
+      <node ref="C2" pin="2"/>
+    </net>
+    <net code="22" name="/A1">
+      <node ref="P5" pin="3"/>
+      <node ref="P7" pin="5"/>
+    </net>
+    <net code="23" name="Net-(U5-Pad11)">
+      <node ref="U5" pin="11"/>
+    </net>
+    <net code="24" name="Net-(U5-Pad3)">
+      <node ref="U5" pin="3"/>
+    </net>
+    <net code="25" name="Net-(U5-Pad10)">
+      <node ref="U5" pin="10"/>
+    </net>
+    <net code="26" name="/gearclock_rtc/SDA">
+      <node ref="U4" pin="15"/>
+      <node ref="R2" pin="2"/>
+      <node ref="U5" pin="13"/>
+      <node ref="U1" pin="27"/>
+    </net>
+    <net code="27" name="/ACL_INT2">
+      <node ref="U5" pin="9"/>
+    </net>
+    <net code="28" name="/ACL_INT1">
+      <node ref="U5" pin="8"/>
+    </net>
+    <net code="29" name="/gearclock_rtc/SCL">
+      <node ref="U5" pin="14"/>
+      <node ref="U1" pin="28"/>
+      <node ref="R3" pin="2"/>
+      <node ref="U4" pin="16"/>
+    </net>
+    <net code="30" name="Net-(C4-Pad1)">
+      <node ref="C4" pin="1"/>
+      <node ref="P2" pin="6"/>
+    </net>
+    <net code="31" name="/1pps">
+      <node ref="U1" pin="32"/>
+      <node ref="P11" pin="9"/>
+    </net>
+    <net code="32" name="/GPS_Tx">
+      <node ref="U1" pin="10"/>
+      <node ref="P11" pin="5"/>
+    </net>
+    <net code="33" name="/FIX">
+      <node ref="U1" pin="19"/>
+      <node ref="P11" pin="4"/>
+    </net>
+    <net code="34" name="/GPS_BAT">
+      <node ref="P11" pin="3"/>
+      <node ref="P10" pin="1"/>
+    </net>
+    <net code="35" name="/gearclock_rtc/SQW">
+      <node ref="U1" pin="1"/>
+      <node ref="U4" pin="3"/>
+      <node ref="R10" pin="2"/>
+      <node ref="B2" pin="1"/>
+    </net>
+    <net code="36" name="/PB6">
+      <node ref="C1" pin="1"/>
+      <node ref="U1" pin="7"/>
+      <node ref="X1" pin="1"/>
+    </net>
+    <net code="37" name="/RESET">
+      <node ref="C4" pin="2"/>
+      <node ref="SW1" pin="2"/>
+      <node ref="R1" pin="2"/>
+      <node ref="P1" pin="5"/>
+      <node ref="U1" pin="29"/>
+    </net>
+    <net code="38" name="/gearclock_rtc/RST">
+      <node ref="B3" pin="1"/>
+      <node ref="U4" pin="4"/>
+    </net>
+    <net code="39" name="/gearclock_rtc/32k">
+      <node ref="B4" pin="1"/>
+      <node ref="U4" pin="1"/>
+    </net>
+    <net code="40" name="/gearclock_rtc/BAT">
+      <node ref="BT1" pin="+"/>
+      <node ref="U4" pin="14"/>
+      <node ref="C9" pin="1"/>
+    </net>
+    <net code="41" name="/MISO">
+      <node ref="SD1" pin="7"/>
+      <node ref="U1" pin="16"/>
+      <node ref="P1" pin="1"/>
+    </net>
+    <net code="42" name="/SCK">
+      <node ref="SD1" pin="5"/>
+      <node ref="P1" pin="3"/>
+      <node ref="U1" pin="17"/>
+    </net>
+    <net code="43" name="/MOSI">
+      <node ref="P1" pin="4"/>
+      <node ref="SD1" pin="3"/>
+      <node ref="U1" pin="15"/>
+    </net>
+    <net code="44" name="/SS">
+      <node ref="SD1" pin="2"/>
+      <node ref="U1" pin="14"/>
+    </net>
+    <net code="45" name="Net-(SD1-PadH2)">
+      <node ref="SD1" pin="H2"/>
+    </net>
+    <net code="46" name="Net-(SD1-PadH1)">
+      <node ref="SD1" pin="H1"/>
+    </net>
+    <net code="47" name="Net-(SD1-Pad9)">
+      <node ref="SD1" pin="9"/>
+    </net>
+    <net code="48" name="Net-(SD1-Pad8)">
+      <node ref="SD1" pin="8"/>
+    </net>
+    <net code="49" name="Net-(SD1-Pad1)">
+      <node ref="SD1" pin="1"/>
+    </net>
+    <net code="50" name="/3Vgps">
+      <node ref="P8" pin="1"/>
+      <node ref="P11" pin="1"/>
+    </net>
+    <net code="51" name="/LED1">
+      <node ref="R4" pin="2"/>
+      <node ref="U1" pin="11"/>
+    </net>
+    <net code="52" name="/Hall">
+      <node ref="U2" pin="2"/>
+      <node ref="U1" pin="22"/>
+    </net>
+    <net code="53" name="GND">
+      <node ref="BT1" pin="-"/>
+      <node ref="U4" pin="9"/>
+      <node ref="U4" pin="12"/>
+      <node ref="U4" pin="11"/>
+      <node ref="C6" pin="2"/>
+      <node ref="U4" pin="10"/>
+      <node ref="U4" pin="13"/>
+      <node ref="U4" pin="8"/>
+      <node ref="U4" pin="7"/>
+      <node ref="U4" pin="6"/>
+      <node ref="C9" pin="2"/>
+      <node ref="U4" pin="5"/>
+      <node ref="U5" pin="12"/>
+      <node ref="C12" pin="2"/>
+      <node ref="C13" pin="2"/>
+      <node ref="C11" pin="2"/>
+      <node ref="P7" pin="8"/>
+      <node ref="U5" pin="5"/>
+      <node ref="C10" pin="2"/>
+      <node ref="P1" pin="6"/>
+      <node ref="P2" pin="1"/>
+      <node ref="P7" pin="2"/>
+      <node ref="P2" pin="2"/>
+      <node ref="C8" pin="2"/>
+      <node ref="U1" pin="21"/>
+      <node ref="C5" pin="2"/>
+      <node ref="LED1" pin="1"/>
+      <node ref="U5" pin="4"/>
+      <node ref="U1" pin="5"/>
+      <node ref="U1" pin="3"/>
+      <node ref="U2" pin="3"/>
+      <node ref="SW1" pin="1"/>
+      <node ref="C3" pin="2"/>
+      <node ref="C7" pin="2"/>
+      <node ref="SD1" pin="G3"/>
+      <node ref="U3" pin="1"/>
+      <node ref="SD1" pin="G4"/>
+      <node ref="SD1" pin="G2"/>
+      <node ref="SD1" pin="G1"/>
+      <node ref="SD1" pin="6"/>
+      <node ref="X1" pin="3"/>
+      <node ref="C2" pin="1"/>
+      <node ref="C1" pin="2"/>
+      <node ref="P11" pin="7"/>
+      <node ref="P12" pin="2"/>
+      <node ref="P13" pin="1"/>
+      <node ref="P3" pin="3"/>
+      <node ref="U5" pin="2"/>
+    </net>
+  </nets>
+</export>

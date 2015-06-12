@@ -1,0 +1,9 @@
+(module IO_ADR (layer F.Cu) (tedit 557AB569)
+  (fp_text reference IO_ADR (at 0 -0.508) (layer F.SilkS) hide
+    (effects (font (size 0.254 0.254) (thickness 0.0254)))
+  )
+  (fp_text value B* (at 0 0.508) (layer F.SilkS) hide
+    (effects (font (size 0.254 0.254) (thickness 0.0254)))
+  )
+  (pad 1 thru_hole rect (at 0 0) (size 0.762 1.016) (drill 0.635) (layers *.Cu *.SilkS *.Mask))
+)
